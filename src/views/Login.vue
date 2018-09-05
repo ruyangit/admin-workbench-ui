@@ -1,6 +1,6 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="login">
+    <h1>This is an about page login</h1>
     <Button type="primary">Primary</Button>
 
     <Icon type="line-chart" />
