@@ -6,21 +6,22 @@ const UserLayout = {
     logo: { default: logo, types: String }
   },
   render() {
+    const { prefix, logo } = this.$props
     return (
-      <div class={`${this.prefix}-container`}>
-        <div class={`${this.prefix}-content`}>
-          <div class={`${this.prefix}-top`}>
-            <div class={`${this.prefix}-header`}>
-            <img alt="logo" class={`${this.prefix}-logo`} src={this.logo} />
-              <span class={`${this.prefix}-title`}>
+      <div class={`${prefix}-container`}>
+        <div class={`${prefix}-content`}>
+          <div class={`${prefix}-top`}>
+            <div class={`${prefix}-header`}>
+              <img alt="logo" class={`${prefix}-logo`} src={logo} />
+              <span class={`${prefix}-title`}>
                 Ant Design
               </span>
             </div>
-            <div class={`${this.prefix}-desc`}>
+            <div class={`${prefix}-desc`}>
               Ant Design 是西湖区最具影响力的 Web 设计规范
             </div>
           </div>
-          <router-view/>
+          <router-view />
         </div>
       </div>
     )
