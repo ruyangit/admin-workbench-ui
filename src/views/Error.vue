@@ -19,4 +19,8 @@
     }
   }
 </script>
+<style lang="less">
+@import url('../assets/less/bundle.less');
+</style>
+
 
