@@ -1,18 +1,14 @@
 import './index.less'
 
-import AiLogin from './Login'
-import AiLoginTab from './LoginTab'
-import AiLoginItem from './LoginItem'
-import AiLoginSubmit from './LoginSubmit'
+import Login from './Login'
+import LoginTab from './LoginTab'
+import LoginSubmit from './LoginSubmit'
 
-AiLogin.Tab = AiLoginTab
-AiLogin.Item = AiLoginItem
-AiLogin.Submit = AiLoginSubmit
+Login.Tab = LoginTab
+Login.Submit = LoginSubmit
 
-export default AiLogin
+export default Login
 export {
-    AiLogin,
-    AiLoginTab,
-    AiLoginItem,
-    AiLoginSubmit
+    LoginTab,
+    LoginSubmit,
 }

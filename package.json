@@ -19,6 +19,7 @@
     "babel-plugin-import": "^1.8.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
+    "svg-sprite-loader": "^3.9.2",
     "vue-template-compiler": "^2.5.17"
   },
   "eslintConfig": {
