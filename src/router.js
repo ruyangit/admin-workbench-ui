@@ -9,7 +9,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('@/views/Login') ,
+      redirect: '/user/login',
+      // component: () => import('@/views/Login') ,
     },
     {
       path: '/user',
@@ -17,6 +18,7 @@ export default new Router({
       children: [
         { path: '/user', redirect: '/user/login' },
         { path: '/user/login', component: () => import('@/views/User/Login') },
+        { path: '/user/register', component: () => import('@/views/User/Register') },
       ],
     },
     

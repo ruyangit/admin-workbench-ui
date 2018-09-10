@@ -1,9 +1,8 @@
 @import 'ant-design-vue/lib/style/themes/default.less';
 
-@ai-view-login-prefix: ~"@{ai-prefix}-view-login";
 @ai-login-prefix: ~"@{ai-prefix}-login";
 
-.@{ai-view-login-prefix}-main {
+.@{ai-login-prefix}-main {
   width: 368px;
   margin: 0 auto;
   @media screen and (max-width: @screen-sm) {
@@ -57,6 +56,10 @@
 
   .ant-form-item {
     margin-bottom: 24px;
+  }
+
+  .ant-form-explain{
+    margin-top: 0px;
   }
 
   .prefixIcon {
