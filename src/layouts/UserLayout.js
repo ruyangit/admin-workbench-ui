@@ -2,22 +2,20 @@ import './UserLayout.less'
 import logo from '@/assets/logo.png';
 const UserLayout = {
   props: {
-    prefix: { default: 'ai-user-layout', types: String },
     logo: { default: logo, types: String }
   },
   render() {
-    const { prefix, logo } = this.$props
     return (
-      <div class={`${prefix}-container`}>
-        <div class={`${prefix}-content`}>
-          <div class={`${prefix}-top`}>
-            <div class={`${prefix}-header`}>
-              <img alt="logo" class={`${prefix}-logo`} src={logo} />
-              <span class={`${prefix}-title`}>
+      <div class="ai-user-layout-container">
+        <div class="content">
+          <div class="top">
+            <div class="header">
+              <img alt="logo" class="logo" src={this.logo} />
+              <span class="title">
                 Ant Design
               </span>
             </div>
-            <div class={`${prefix}-desc`}>
+            <div class="desc">
               Ant Design 是西湖区最具影响力的 Web 设计规范
             </div>
           </div>

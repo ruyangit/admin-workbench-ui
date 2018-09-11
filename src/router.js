@@ -2,16 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import UserLayout from '@/layouts/UserLayout'
+import BasicLayout from '@/layouts/BasicLayout'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      redirect: '/user/login',
-      // component: () => import('@/views/Login') ,
-    },
+    // user
     {
       path: '/user',
       component: UserLayout,
@@ -21,6 +18,20 @@ export default new Router({
         { path: '/user/register', component: () => import('@/views/User/Register') },
       ],
     },
-    
+    // app
+    {
+      path: '/',
+      component: BasicLayout,
+      children: [
+        // dashboard
+        { path: '/', redirect: '/dashboard/analysis' },
+        {
+          path: '/dashboard', name: 'dashboard', children: [
+            { path: '/dashboard/analysis', name: 'analysis', component: () => import('@/views/Dashboard/Analysis') },
+          ]
+        }
+      ]
+    },
+
   ]
 })

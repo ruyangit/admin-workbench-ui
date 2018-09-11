@@ -1,0 +1,55 @@
+@import 'ant-design-vue/lib/style/themes/default.less';
+
+@ai-sider-menu-prefix: ~"@{ai-prefix}-sider-menu";
+
+.@{ai-sider-menu-prefix}{
+    .logo{
+        width: 100%;
+        height: 64px;
+        position: relative;
+        line-height: 64px;
+        padding-left: (@menu-collapsed-width - 32px) / 2;
+        transition: all 0.3s;
+        background: #002140;
+        overflow: hidden;
+        img {
+            display: inline-block;
+            vertical-align: middle;
+            height: 32px;
+        }
+        h1 {
+            color: white;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 20px;
+            margin: 0 0 0 12px;
+            font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            font-weight: 600;
+        }
+    }
+    
+}
+.sider {
+    min-height: 100vh;
+    box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+    position: relative;
+    z-index: 10;
+    &.fixSiderbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    &.light {
+      box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
+      background-color: white;
+      .logo {
+        background: white;
+        border-bottom: 1px solid @border-color-split;
+        border-right: 1px solid @border-color-split;
+        h1 {
+          color: @primary-color;
+        }
+      }
+    }
+}
+
