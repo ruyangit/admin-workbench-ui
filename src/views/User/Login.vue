@@ -133,12 +133,20 @@ export default {
       );
     },
     send() {
-      message.loading("Action in progress..", 0);
-      setTimeout(() => {
-        this.start = true;
-        message.destroy();
-        message.success("This is a message of success code [ 4569 ]",10);
-      }, 1000);
+      new Promise((resolve, reject) => {
+        this.form.validateFields(["mobile"], {}, (err, values) => {
+          if (err) {
+            reject(err);
+          } else {
+            message.loading("Action in progress..", 0);
+            setTimeout(() => {
+              this.start = true;
+              message.destroy();
+              message.success("This is a message of success code [ 4569 ]", 10);
+            }, 1000);
+          }
+        });
+      });
     }
   },
   mounted() {

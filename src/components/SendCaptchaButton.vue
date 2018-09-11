@@ -67,7 +67,7 @@ const SendCaptchaButton = {
       return this.runStr.replace(/\{([^{]*?)%s(.*?)\}/g, second);
     },
     handleClick() {
-      this.start = true;
+      // this.start = true;
       this.$emit("click");
     }
   },

@@ -64,103 +64,111 @@
 </template>
 
 <script>
-    import {
-        Form,
-        Input,
-        Icon,
-        Checkbox,
-        Row,
-        Col,
-        Button,
-        message,
-        Popover,
-        Progress,
-        Select
-    } from "ant-design-vue";
-    import SendCaptchaButton from "@/components/SendCaptchaButton";
-    export default {
-        name: "ai-register",
-        data: () => ({
-            visible: false,
-            help: "",
-            start: false,
-            passwordStatus: "poor",
-            passwordProgressPercent: 0,
-            passwordProgressStatus: "active"
-        }),
-        components: {
-            AForm: Form,
-            AFormItem: Form.Item,
-            AButton: Button,
-            ACheckbox: Checkbox,
-            AInput: Input,
-            AInputGroup: Input.Group,
-            AIcon: Icon,
-            ARow: Row,
-            ACol: Col,
-            ASendCaptchaButton: SendCaptchaButton,
-            APopover: Popover,
-            AProgress: Progress,
-            ASelect: Select,
-            ASelectOption: Select.Option
-        },
-        methods: {
-            checkPassword(rule, value, callback) {
-                if (!value) {
-                    this.help = "请输入密码！";
-                    this.visible = !!value;
-                    callback("error");
-                } else {
-                    this.passwordProgressPercent =
-                        value.length * 10 > 100 ? 100 : value.length * 10;
-                    if (value && value.length > 5) {
-                        this.passwordStatus = "pass";
-                        this.passwordProgressStatus = "active";
-                    }
-                    if (value && value.length > 9) {
-                        this.passwordStatus = "ok";
-                        this.passwordProgressStatus = "success";
-                    }
-                    if (value && value.length < 6) {
-                        this.passwordStatus = "poor";
-                        this.passwordProgressStatus = "exception";
-                    }
-                    this.help = "";
-                    if (!this.visible) {
-                        this.visible = !!value;
-                    }
-                    if (value.length < 6) {
-                        callback("error");
-                    } else {
-                        callback();
-                    }
-                }
-            },
-            checkConfirm(rule, value, callback) {
-                if (value && value !== this.form.getFieldValue("password")) {
-                    callback("两次输入的密码不匹配!");
-                } else {
-                    callback();
-                }
-            },
-            handleSubmit() {
-                this.form.validateFields((err, values) => {
-                    if (!err) {
-                        console.log("Received values of form: ", values);
-                    }
-                });
-            },
-            send() {
-                message.loading("Action in progress..", 0);
-                setTimeout(() => {
-                    this.start = true;
-                    message.destroy();
-                    message.success("This is a message of success code [ 4569 ]",10);
-                }, 1000);
-            }
+import {
+  Form,
+  Input,
+  Icon,
+  Checkbox,
+  Row,
+  Col,
+  Button,
+  message,
+  Popover,
+  Progress,
+  Select
+} from "ant-design-vue";
+import SendCaptchaButton from "@/components/SendCaptchaButton";
+export default {
+  name: "ai-register",
+  data: () => ({
+    visible: false,
+    help: "",
+    start: false,
+    passwordStatus: "poor",
+    passwordProgressPercent: 0,
+    passwordProgressStatus: "active"
+  }),
+  components: {
+    AForm: Form,
+    AFormItem: Form.Item,
+    AButton: Button,
+    ACheckbox: Checkbox,
+    AInput: Input,
+    AInputGroup: Input.Group,
+    AIcon: Icon,
+    ARow: Row,
+    ACol: Col,
+    ASendCaptchaButton: SendCaptchaButton,
+    APopover: Popover,
+    AProgress: Progress,
+    ASelect: Select,
+    ASelectOption: Select.Option
+  },
+  methods: {
+    checkPassword(rule, value, callback) {
+      if (!value) {
+        this.help = "请输入密码！";
+        this.visible = !!value;
+        callback("error");
+      } else {
+        this.passwordProgressPercent =
+          value.length * 10 > 100 ? 100 : value.length * 10;
+        if (value && value.length > 5) {
+          this.passwordStatus = "pass";
+          this.passwordProgressStatus = "active";
         }
-    };
+        if (value && value.length > 9) {
+          this.passwordStatus = "ok";
+          this.passwordProgressStatus = "success";
+        }
+        if (value && value.length < 6) {
+          this.passwordStatus = "poor";
+          this.passwordProgressStatus = "exception";
+        }
+        this.help = "";
+        if (!this.visible) {
+          this.visible = !!value;
+        }
+        if (value.length < 6) {
+          callback("error");
+        } else {
+          callback();
+        }
+      }
+    },
+    checkConfirm(rule, value, callback) {
+      if (value && value !== this.form.getFieldValue("password")) {
+        callback("两次输入的密码不匹配!");
+      } else {
+        callback();
+      }
+    },
+    handleSubmit() {
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log("Received values of form: ", values);
+        }
+      });
+    },
+    send() {
+      new Promise((resolve, reject) => {
+        this.form.validateFields(["mobile"], {}, (err, values) => {
+          if (err) {
+            reject(err);
+          } else {
+            message.loading("Action in progress..", 0);
+            setTimeout(() => {
+              this.start = true;
+              message.destroy();
+              message.success("This is a message of success code [ 4569 ]", 10);
+            }, 1000);
+          }
+        });
+      });
+    }
+  }
+};
 </script>
 <style lang="less">
-    @import url("./register.less");
+@import url("./register.less");
 </style>
