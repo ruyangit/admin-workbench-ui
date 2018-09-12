@@ -30,18 +30,28 @@ export default {
       });
       return keys;
     },
+    getIcon(icon) {
+      if (typeof icon === "string" && icon.indexOf("http") === 0) {
+        return <img src={icon} alt="icon" class="icon" />;
+      }
+      if (typeof icon === "string") {
+        return <a-icon type={icon} />;
+      }
+      return icon;
+    },
     getNavMenuItems(menusData, parent) {
       if (!menusData) {
         return [];
       }
-      return menusData
-        .filter(item => item.name && !item.hideInMenu)
-        .map(item => {
-          // make dom
+      return menusData.map(item => {
+        if (item.name && !item.hideInMenu) {
           const ItemDom = this.getSubMenuOrItem(item, parent);
           return this.checkPermissionItem(item.authority, ItemDom);
-        })
-        .filter(item => item);
+        }
+        if (item.menus) {
+          return this.getNavMenuItems(item.menus, parent);
+        }
+      });
     },
     getSubMenuOrItem(item) {
       // doc: add hideChildrenInMenu 隐藏菜单
@@ -50,14 +60,13 @@ export default {
         !item.hideChildrenInMenu &&
         item.menus.some(menu => menu.name)
       ) {
-        //   const name = formatMessage({ id: item.locale });
-        const name = "哈哈";
+        const name = this.$t(item.locale);
         return (
           <a-sub-menu
             title={
               item.icon ? (
                 <span>
-                  icon
+                  {this.getIcon(item.icon)}
                   <span>{name}</span>
                 </span>
               ) : (
@@ -66,7 +75,7 @@ export default {
             }
             key={item.path}
           >
-            {this.getNavMenuItems(item.children)}
+            {this.getNavMenuItems(item.menus)}
           </a-sub-menu>
         );
       }
@@ -75,39 +84,24 @@ export default {
       );
     },
     getMenuItemPath(item) {
-      return "getMenuItemPath";
-      // const name = formatMessage({ id: item.locale });
-      // const itemPath = this.conversionPath(item.path);
-      // const icon = getIcon(item.icon);
-      // const { target } = item;
+      const name = this.$t(item.locale);
+      const itemPath = this.conversionPath(item.path);
+      const icon = this.getIcon(item.icon);
       // // Is it a http link
-      // if (/^https?:\/\//.test(itemPath)) {
-      //     return (
-      //         <a href={itemPath} target={target}>
-      //         {icon}
-      //         <span>{name}</span>
-      //         </a>
-      //     );
-      // }
-      // return <span>test</span>
-      // const { location, isMobile, onCollapse } = this.props;
-      // return (
-      // <Link
-      //     to={itemPath}
-      //     target={target}
-      //     replace={itemPath === location.pathname}
-      //     onClick={
-      //     isMobile
-      //         ? () => {
-      //             onCollapse(true);
-      //         }
-      //         : undefined
-      //     }
-      // >
-      //     {icon}
-      //     <span>{name}</span>
-      // </Link>
-      // );
+      if (/^https?:\/\//.test(itemPath)) {
+        return (
+          <a href={itemPath}>
+            {icon}
+            <span>{name}</span>
+          </a>
+        );
+      }
+      return (
+        <router-link to={itemPath}>
+          {icon}
+          <span>{name}</span>
+        </router-link>
+      );
     },
     checkPermissionItem(authority, ItemDom) {
       return ItemDom;
@@ -125,7 +119,7 @@ export default {
   },
   render() {
     return (
-      <a-menu key="Menu" mode="inline" theme="dark" {...this.props}>
+      <a-menu key="Menu" mode="inline" theme="dark" collapsed={this.collapsed}>
         {this.getNavMenuItems(this.menuData)}
       </a-menu>
     );
