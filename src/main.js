@@ -1,15 +1,15 @@
 import Vue from 'vue'
-import router from './router'
 import store from './store'
-import VueI18n from 'vue-i18n'
+import router from './router'
+import Vuei18n from 'vue-i18n'
 import { sync } from 'vuex-router-sync'
-import { LocaleProvider } from "ant-design-vue";
+// import { LocaleProvider } from "ant-design-vue";
 import zh_CN from "./locales/zh_CN";
 import en_US from "./locales/en_US";
 
 Vue.config.productionTip = false
 
-Vue.use(VueI18n)
+Vue.use(Vuei18n)
 
 const locale = 'zh_CN';
 
@@ -18,7 +18,7 @@ const messages = {
   "en_US": en_US,
 }
 
-const i18n = new VueI18n({
+const i18n = new Vuei18n({
   locale,  // 语言标识
   messages
 })
@@ -34,9 +34,9 @@ new Vue({
   }),
   render() {
     return (
-      <LocaleProvider locale={messages[this.locale]} >
+      // <LocaleProvider locale={messages[this.locale]} >
         <div class="screen-xl"><router-view /></div>
-      </LocaleProvider>
+      // </LocaleProvider>
     )
   }
 }).$mount('#app')

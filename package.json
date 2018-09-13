@@ -8,6 +8,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "ant-design-vue": "^1.1.0",
+    "echarts": "^4.1.0",
+    "numeral": "^2.0.6",
     "vue": "^2.5.17",
     "vue-i18n": "^8.1.0",
     "vue-router": "^3.0.1",
@@ -18,7 +21,6 @@
     "@vue/cli-plugin-babel": "^3.0.1",
     "@vue/cli-plugin-eslint": "^3.0.1",
     "@vue/cli-service": "^3.0.1",
-    "ant-design-vue": "^1.0.3",
     "babel-plugin-import": "^1.8.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",

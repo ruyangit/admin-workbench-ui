@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store'
 
 import UserLayout from '@/layouts/UserLayout'
 import BasicLayout from '@/layouts/BasicLayout'
@@ -7,7 +8,7 @@ import BlankLayout from '@/layouts/BlankLayout'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     // user
     {
@@ -51,11 +52,6 @@ export default new Router({
               hideChildrenInMenu: true,
               children: [
                 {
-                  path: '/form/step-form',
-                  name: 'stepform',
-                  redirect: '/form/step-form/info',
-                },
-                {
                   path: '/form/step-form/info',
                   name: 'info',
                   component: () => import('@/views/Dashboard/Analysis'),
@@ -69,14 +65,42 @@ export default new Router({
           path: '/list',
           icon: 'table',
           name: 'list',
+          component: BlankLayout,
+          children: [
+            {
+              path: '/list/search',
+              name: 'searchlist',
+              component: BlankLayout,
+              children: [
+                {
+                  path: '/list/search/articles',
+                  name: 'articles',
+                },
+                {
+                  path: '/list/search/projects',
+                  name: 'projects',
+                },
+                {
+                  path: '/list/search/applications',
+                  name: 'applications',
+                },
+              ]
+            }
+          ]
         },
         {
           path: '/profile',
-          name: 'profile',
           icon: 'profile',
+          name: 'profile',
         }
       ]
     },
 
   ]
 })
+
+router.afterEach(() => {
+  store.commit('global/UpdateBasicLayoutSpinning', false);
+});
+
+export default router

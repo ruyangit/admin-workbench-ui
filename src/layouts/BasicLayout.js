@@ -1,10 +1,13 @@
 import './BasicLayout.less'
-import { Layout, Icon } from "ant-design-vue";
+import { Layout, Icon, Spin } from "ant-design-vue";
 import SiderMenu from "@/components/SiderMenu/index.js";
+import { mapGetters } from "vuex";
 const BasicLayout = {
     data: () => ({
-        collapsed: false
+        collapsed: false,
+        // spinning: false,
     }),
+    props: ['fixedHeader'],
     methods: {
         formatter(data, parentPath = '', parentAuthority, parentName) {
             return data.map(item => {
@@ -36,14 +39,29 @@ const BasicLayout = {
             return this.formatter(routes);
         }
     },
-    mounted() {
+    computed: {
+        ...mapGetters({
+            spinning: "global/getBasicLayoutSpinning"
+        }),
+        getContentStyle() {
+            return {
+                margin: '24px 24px 0',
+                paddingTop: this.fixedHeader ? 64 : 0,
+            }
+        }
+    },
+    beforeRouteUpdate(to, from, next) {
+        this.$store.commit('global/UpdateBasicLayoutSpinning', true)
+        this.$nextTick(() => {
+            next();
+        })
     },
     render() {
-        const { collapsed } = this;
+        const { collapsed, getContentStyle, spinning } = this;
         const menuData = this.getMenuData();
         return (
             <Layout class="ai-basic-layout-container">
-                <SiderMenu collapsed={collapsed} menuData={menuData}/>
+                <SiderMenu collapsed={collapsed} menuData={menuData} />
                 <Layout>
                     <Layout.Header>
                         <Icon
@@ -52,8 +70,10 @@ const BasicLayout = {
                             onClick={() => this.collapsed = !collapsed}
                         />
                     </Layout.Header>
-                    <Layout.Content>
-                        <router-view />
+                    <Layout.Content style={getContentStyle}>
+                        <Spin spinning={spinning}>
+                            <router-view />
+                        </Spin>
                     </Layout.Content>
                 </Layout>
             </Layout>

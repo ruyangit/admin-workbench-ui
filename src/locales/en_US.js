@@ -1,6 +1,6 @@
-import en_US from "ant-design-vue/lib/locale-provider/en_US";
+// import en_US from "ant-design-vue/lib/locale-provider/en_US";
 export default {
-  ...en_US,
+  // ...en_US,
   'navbar.lang': '中文',
   'menu.home': 'Home',
   'menu.dashboard': 'Dashboard',

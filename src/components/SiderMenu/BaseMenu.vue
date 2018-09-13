@@ -2,13 +2,10 @@
 import { Menu, Icon } from "ant-design-vue";
 // Conversion router to menu.
 export default {
-  data() {
-    return {
-      flatMenuKeys: this.getFlatMenuKeys(this.menuData)
-    };
-  },
   props: {
     collapsed: { default: false, type: Boolean },
+    theme: { default: "dark", type: String },
+    mode: { default: "inline", type: String },
     menuData: { default: [], type: Array }
   },
   components: {
@@ -20,16 +17,6 @@ export default {
     AIcon: Icon
   },
   methods: {
-    getFlatMenuKeys(menus) {
-      let keys = [];
-      menus.forEach(item => {
-        if (item.menus) {
-          keys = keys.concat(this.getFlatMenuKeys(item.menus));
-        }
-        keys.push(item.path);
-      });
-      return keys;
-    },
     getIcon(icon) {
       if (typeof icon === "string" && icon.indexOf("http") === 0) {
         return <img src={icon} alt="icon" class="icon" />;
@@ -37,6 +24,9 @@ export default {
       if (typeof icon === "string") {
         return <a-icon type={icon} />;
       }
+      // if(!icon){
+      //   return <a-icon type='profile' />;
+      // }
       return icon;
     },
     getNavMenuItems(menusData, parent) {
@@ -111,15 +101,30 @@ export default {
         return path;
       }
       return `/${path || ""}`.replace(/\/+/g, "/");
+    },
+    urlToList(url) {
+      const urllist = url.split("/").filter(i => i);
+      return urllist.map(
+        (urlItem, index) => `/${urllist.slice(0, index + 1).join("/")}`
+      );
+    },
+    getOpenKeys(path) {
+      const openKeys = this.urlToList(path);
+      return openKeys.filter(item => item !== path);
     }
   },
-  mounted() {
-    // console.log(this.menuData);
-    // console.log(this.flatMenuKeys);
-  },
   render() {
+    const { path } = this.$route;
+    const openKeys = this.getOpenKeys(path);
     return (
-      <a-menu key="Menu" mode="inline" theme="dark" collapsed={this.collapsed}>
+      <a-menu
+        defaultOpenKeys={openKeys}
+        defaultSelectedKeys={[path]}
+        key="Menu"
+        mode={this.mode}
+        theme={this.theme}
+        collapsed={this.collapsed}
+      >
         {this.getNavMenuItems(this.menuData)}
       </a-menu>
     );
