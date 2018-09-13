@@ -1,6 +1,7 @@
 
 const state = {
-    BasicLayoutSpinning: true
+    BasicLayoutSpinning: true,
+    ChangeLayoutCollapsed: false
 }
 //dispatch
 const actions = {
@@ -19,11 +20,17 @@ const mutations = {
     ['UpdateBasicLayoutSpinning'](state, payload) {
         state.BasicLayoutSpinning = payload
     },
+    ['UpdateChangeLayoutCollapsed'](state, payload) {
+        state.ChangeLayoutCollapsed = payload
+    },
 }
 
 const getters = {
     ['getBasicLayoutSpinning'](state) {
         return state.BasicLayoutSpinning
+    },
+    ['getChangeLayoutCollapsed'](state) {
+        return state.ChangeLayoutCollapsed
     },
 }
 

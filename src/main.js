@@ -35,7 +35,7 @@ new Vue({
   render() {
     return (
       // <LocaleProvider locale={messages[this.locale]} >
-        <div class="screen-xl"><router-view /></div>
+      <router-view />
       // </LocaleProvider>
     )
   }

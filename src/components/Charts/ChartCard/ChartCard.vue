@@ -1,7 +1,7 @@
 <template>
     <a-card :loading="loading" :bodyStyle="{padding: '20px 24px 8px 24px'}">
         <div class="chartCard" >
-            <div :class="classNames('chartTop',{['chartTopMargin']:!!$slots.default && !!$slots.footer})">
+            <div :class="classNames('chartTop',{['chartTopMargin']:!$slots.default && !$slots.footer})">
                 <div class="avatar">{{avatar}}</div>
                 <div class="metaWrap">
                     <div class="meta">
@@ -18,7 +18,7 @@
                 <slot></slot>
               </div>
             </div>
-              <div v-if="$slots.footer" :class="classNames('footer',{['footerMargin']:!!$slots.default})">
+              <div v-if="$slots.footer" :class="classNames('footer',{['footerMargin']:!$slots.default})">
                 <slot name="footer"></slot>
               </div>
         </div>

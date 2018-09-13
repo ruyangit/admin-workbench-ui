@@ -72,8 +72,7 @@
             </span>
             <a-icon type="info-circle-o" />
         </a-tooltip>
-        
-        day-visits
+        <a-mini-progress  :percent="78" :strokeWidth="8" :target="80" color="#13C2C2"/>
         <div :style="{whiteSpace:'nowrap',overflow:'hidden'}" slot="footer">
             <a-trend flag="up" :style="{marginRight: '16px'}">
               {{$t('app.analysis.week')}}
@@ -94,7 +93,7 @@
 import { Card, Row, Col, Tooltip, Icon } from "ant-design-vue";
 import GridContent from "@/components/PageWrapper/GridContent";
 import Trend from "@/components/Trend";
-import { ChartCard, Field, yuan } from "@/components/Charts";
+import { ChartCard, Field, yuan, MiniProgress } from "@/components/Charts";
 import numeral from "numeral";
 // echarts相关
 // let echarts = require("echarts/lib/echarts");
@@ -113,7 +112,8 @@ export default {
     AField: Field,
     ATooltip: Tooltip,
     AIcon: Icon,
-    ATrend: Trend
+    ATrend: Trend,
+    AMiniProgress:MiniProgress
   },
   methods: {
     yuan,

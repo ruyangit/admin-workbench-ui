@@ -1,12 +1,9 @@
 import './BasicLayout.less'
 import { Layout, Icon, Spin } from "ant-design-vue";
-import SiderMenu from "@/components/SiderMenu/index.js";
+import SiderMenu from "@/components/SiderMenu";
+import GlobalHeader from "@/components/GlobalHeader";
 import { mapGetters } from "vuex";
 const BasicLayout = {
-    data: () => ({
-        collapsed: false,
-        // spinning: false,
-    }),
     props: ['fixedHeader'],
     methods: {
         formatter(data, parentPath = '', parentAuthority, parentName) {
@@ -37,11 +34,15 @@ const BasicLayout = {
         getMenuData() {
             const { options: { routes } } = this.$router;
             return this.formatter(routes);
+        },
+        onCollapsed() {
+            this.$store.commit('global/UpdateChangeLayoutCollapsed', !this.collapsed)
         }
     },
     computed: {
         ...mapGetters({
-            spinning: "global/getBasicLayoutSpinning"
+            spinning: "global/getBasicLayoutSpinning",
+            collapsed: "global/getChangeLayoutCollapsed"
         }),
         getContentStyle() {
             return {
@@ -57,7 +58,7 @@ const BasicLayout = {
         })
     },
     render() {
-        const { collapsed, getContentStyle, spinning } = this;
+        const { collapsed, onCollapsed, getContentStyle, spinning } = this;
         const menuData = this.getMenuData();
         return (
             <Layout class="ai-basic-layout-container">
@@ -67,13 +68,13 @@ const BasicLayout = {
                         <Icon
                             class="trigger"
                             type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                            onClick={() => this.collapsed = !collapsed}
+                            onClick={onCollapsed}
                         />
+                        <Spin spinning={spinning}></Spin>
+                        <GlobalHeader />
                     </Layout.Header>
                     <Layout.Content style={getContentStyle}>
-                        <Spin spinning={spinning}>
-                            <router-view />
-                        </Spin>
+                        <router-view />
                     </Layout.Content>
                 </Layout>
             </Layout>

@@ -1,0 +1,35 @@
+@import 'ant-design-vue/lib/style/themes/default.less';
+
+@ai-notice-prefix: ~"@{ai-prefix}-notice";
+
+.@{ai-notice-prefix}{
+    .popover {
+        width: 336px;
+        :global(.ant-popover-inner-content) {
+          padding: 0;
+        }
+      }
+      
+      .noticeButton {
+        cursor: pointer;
+        display: inline-block;
+        transition: all 0.3s;
+      }
+      
+      .icon {
+        font-size: 18px;
+        padding: 4px;
+      }
+      
+      .tabs {
+        :global {
+          .ant-tabs-nav-scroll {
+            text-align: center;
+          }
+          .ant-tabs-bar {
+            margin-bottom: 4px;
+          }
+        }
+      }
+}
+
