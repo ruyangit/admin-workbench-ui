@@ -37,6 +37,13 @@ const BasicLayout = {
         },
         onCollapsed() {
             this.$store.commit('global/UpdateChangeLayoutCollapsed', !this.collapsed)
+        },
+        onResizeCollapsed() {
+            if (window.innerWidth <= 900) {
+                this.$store.commit('global/UpdateChangeLayoutCollapsed', true)
+            } else {
+                this.$store.commit('global/UpdateChangeLayoutCollapsed', false)
+            }
         }
     },
     computed: {
@@ -56,6 +63,14 @@ const BasicLayout = {
         this.$nextTick(() => {
             next();
         })
+    },
+    mounted() {
+        this.onResizeCollapsed()
+
+        window.onresize = () => {
+            // 通过捕获系统的onresize事件触发我们需要执行的事件
+            this.onResizeCollapsed()
+        }
     },
     render() {
         const { collapsed, onCollapsed, getContentStyle, spinning } = this;

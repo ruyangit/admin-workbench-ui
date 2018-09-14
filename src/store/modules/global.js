@@ -1,5 +1,7 @@
 
 const state = {
+    Setting: {
+    },
     BasicLayoutSpinning: true,
     ChangeLayoutCollapsed: false
 }

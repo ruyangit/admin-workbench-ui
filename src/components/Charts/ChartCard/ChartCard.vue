@@ -13,7 +13,7 @@
                     <div class="total" v-if="total">{{total}}</div>
                 </div>
             </div>
-            <div class="content" :style="{height: contentHeight || 'auto'}" v-if="$slots.default">
+            <div class="content" ref="cardRef" :style="{height: contentHeight || 'auto'}" v-if="$slots.default">
               <div class="contentFixed">
                 <slot></slot>
               </div>

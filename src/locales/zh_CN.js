@@ -1,7 +1,7 @@
 // import zhMessages from '../../locales/zh.json';
-// import zh_CN from "ant-design-vue/lib/locale-provider/zh_CN";
+import zh_CN from "ant-design-vue/es/locale-provider/zh_CN";
 export default {
-  // ...zh_CN,
+  ...zh_CN,
   'navbar.lang': 'English',
   'menu.home': '首页',
   'menu.dashboard': 'Dashboard',

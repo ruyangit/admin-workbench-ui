@@ -24,24 +24,29 @@
         <a-tab-pane key="2" tab="手机号登录">
           <a-form-item
           fieldDecoratorId="mobile"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入手机号!' }]}"
+          :fieldDecoratorOptions="{rules: [
+            { required: true, message: '请输入手机号！' },
+            { pattern: /^1\d{10}$/, message: '手机号格式错误！' },
+          ]}"
           >
             <a-input placeholder="手机号" size="large">
               <a-icon type="mobile" style="color:rgba(0,0,0,.25)" />
             </a-input>
           </a-form-item>
-          <a-form-item 
-          fieldDecoratorId="captcha"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入验证码!' }]}"
-          >
+          <a-form-item>
             <a-row :gutter="8">
               <a-col :span="16">
+                <a-form-item 
+                  fieldDecoratorId="captcha"
+                  :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入验证码!' }]}"
+                  >
                 <a-input placeholder="验证码" size="large">
                   <a-icon type="scan" style="color:rgba(0,0,0,.25)" />
                 </a-input>
+                </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-send-captcha-button v-model="start" @click="send" :second="120" class="getCaptcha" size="large" />
+                <a-send-captcha-button v-model="start" @click="send" :second="120" class="getCaptcha" storageKey="SendCaptchaStorageLoginKey" size="large" />
               </a-col>
             </a-row>
           </a-form-item>
@@ -127,7 +132,8 @@ export default {
         },
         (err, values) => {
           if (!err) {
-            console.log("Received values of form: ", values);
+            // console.log("Received values of form: ", values);
+            this.$router.push({path:'/'})
           }
         }
       );

@@ -8,8 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "ant-design-vue": "^1.1.0",
-    "echarts": "^4.1.0",
+    "@antv/g2": "^3.2.7",
+    "ant-design-vue": "^1.1.1",
     "numeral": "^2.0.6",
     "vue": "^2.5.17",
     "vue-i18n": "^8.1.0",

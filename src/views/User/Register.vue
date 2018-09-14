@@ -33,8 +33,8 @@
                 <a-input type="password" placeholder="确认密码" size="large" />
             </a-form-item>
             <a-form-item fieldDecoratorId="mobile" :fieldDecoratorOptions="{rules: [
-                                            { required: true, message: '请输入手机号！', },
-                                            { pattern: /^1\d{10}$/, message: '手机号格式错误！', },
+                                            { required: true, message: '请输入手机号！' },
+                                            { pattern: /^1\d{10}$/, message: '手机号格式错误！' },
                                             ]}">
                 <a-input placeholder="11位手机号" size="large">
                     <a-select slot="addonBefore" defaultValue="+86" style="width: 90px">
@@ -49,7 +49,7 @@
                         <a-input placeholder="验证码" size="large"/>
                     </a-col>
                     <a-col :span="8">
-                        <a-send-captcha-button v-model="start" @click="send" :second="120" class="getCaptcha" size="large" />
+                        <a-send-captcha-button v-model="start" @click="send" :second="120" class="getCaptcha"  storageKey="SendCaptchaStorageRegisterKey" size="large" />
                     </a-col>
                 </a-row>
             </a-form-item>
@@ -146,7 +146,8 @@ export default {
     handleSubmit() {
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log("Received values of form: ", values);
+          // console.log("Received values of form: ", values);
+          this.$router.push({path:'/'})
         }
       });
     },

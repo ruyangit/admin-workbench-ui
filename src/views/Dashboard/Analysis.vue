@@ -1,107 +1,129 @@
 <template>
-<a-grid-content>
-  <a-row :gutter="24">
-    <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="6" :style="{marginBottom: '24px'}">
-      <a-chart-card
-        :loading="loading"
-        contentHeight="46px"
-        :total="yuan(158829)"
-        :title="$t('app.analysis.total-sales')"
-      >
-        <a-tooltip placement="top" slot="action">
-          <span slot="title">
-              <span v-html="$t('app.analysis.introduce')"></span>
+  <a-grid-content>
+    <a-row :gutter="24">
+      <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="6" :style="{marginBottom: '24px'}">
+        <a-chart-card :loading="loading" contentHeight="46px" :total="yuan(158829)" :title="$t('app.analysis.total-sales')">
+          <a-tooltip placement="top" slot="action">
+            <span slot="title">
+                <span v-html="$t('app.analysis.introduce')"></span>
             </span>
             <a-icon type="info-circle-o" />
-        </a-tooltip>
-        <a-field slot="footer" :label="$t('app.analysis.day-sales')" :value="yuan(158829)" />
-        <a-trend flag="up" :style="{marginRight: '16px'}">
-          {{$t('app.analysis.week')}}
-          <span class="trendText">12%</span>
-        </a-trend>
-        <a-trend flag="down">
-          {{$t('app.analysis.day')}}
-          <span class="trendText">11%</span>
-        </a-trend>
-      </a-chart-card>
-    </a-col>
-    <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="6" :style="{marginBottom: '24px'}">
-      <a-chart-card
-        :loading="loading"
-        contentHeight="46px"
-        :total="numeral(8846).format('0,0')"
-        :title="$t('app.analysis.visits')"
-      >
-        <a-tooltip placement="top" slot="action">
-          <span slot="title">
-              <span v-html="$t('app.analysis.introduce')"></span>
+          </a-tooltip>
+          <a-field slot="footer" :label="$t('app.analysis.day-sales')" :value="yuan(6093)" />
+          <a-trend flag="up" :style="{marginRight: '16px'}">
+            {{$t('app.analysis.week')}}
+            <span class="trendText">12%</span>
+          </a-trend>
+          <a-trend flag="down">
+            {{$t('app.analysis.day')}}
+            <span class="trendText">11%</span>
+          </a-trend>
+        </a-chart-card>
+      </a-col>
+      <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="6" :style="{marginBottom: '24px'}">
+        <a-chart-card :loading="loading" contentHeight="46px" :total="numeral(36784).format('0,0')" :title="$t('app.analysis.visits')">
+          <a-tooltip placement="top" slot="action">
+            <span slot="title">
+                <span v-html="$t('app.analysis.introduce')"></span>
             </span>
             <a-icon type="info-circle-o" />
-        </a-tooltip>
-        <a-field slot="footer" :label="$t('app.analysis.day-visits')" :value="numeral(8846).format('0,0')" />
-        day-visits
-      </a-chart-card>
-    </a-col>
-    <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="6" :style="{marginBottom: '24px'}">
-      <a-chart-card
-        :loading="loading"
-        contentHeight="46px"
-        :total="numeral(6560).format('0,0')"
-        :title="$t('app.analysis.payments')"
-      >
-        <a-tooltip placement="top" slot="action">
-          <span slot="title">
-              <span v-html="$t('app.analysis.introduce')"></span>
+          </a-tooltip>
+          <a-field slot="footer" :label="$t('app.analysis.day-visits')" :value="numeral(6678).format('0,0')" />
+          <!-- <a-mini-area color="#975FE4" /> -->
+          <a-trend flag="up" :style="{marginRight: '16px'}">
+            {{$t('app.analysis.week')}}
+            <span class="trendText">6%</span>
+          </a-trend>
+          <a-trend flag="down">
+            {{$t('app.analysis.day')}}
+            <span class="trendText">2%</span>
+          </a-trend>
+        </a-chart-card>
+      </a-col>
+      <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="6" :style="{marginBottom: '24px'}">
+        <a-chart-card :loading="loading" contentHeight="46px" :total="numeral(6560).format('0,0')" :title="$t('app.analysis.payments')">
+          <a-tooltip placement="top" slot="action">
+            <span slot="title">
+                <span v-html="$t('app.analysis.introduce')"></span>
             </span>
             <a-icon type="info-circle-o" />
-        </a-tooltip>
-        <a-field slot="footer" :label="$t('app.analysis.conversion-rate')" value="60%"/>
-        conversion-rate
-      </a-chart-card>
-    </a-col>
-    <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="6" :style="{marginBottom: '24px'}">
-      <a-chart-card
-        :loading="loading"
-        contentHeight="46px"
-        total="78%"
-        :title="$t('app.analysis.operational-effect')"
-      >
-        <a-tooltip placement="top" slot="action">
-          <span slot="title">
-              <span v-html="$t('app.analysis.introduce')"></span>
+          </a-tooltip>
+          <!-- <a-mini-bar /> -->
+          <a-mini-progress :percent="55" :strokeWidth="8" :target="80" color="#975FE4" />
+          <a-field slot="footer" :label="$t('app.analysis.conversion-rate')" value="30%" />
+        </a-chart-card>
+      </a-col>
+      <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="6" :style="{marginBottom: '24px'}">
+        <a-chart-card :loading="loading" contentHeight="46px" total="78%" :title="$t('app.analysis.operational-effect')">
+          <a-tooltip placement="top" slot="action">
+            <span slot="title">
+                <span v-html="$t('app.analysis.introduce')"></span>
             </span>
             <a-icon type="info-circle-o" />
-        </a-tooltip>
-        <a-mini-progress  :percent="78" :strokeWidth="8" :target="80" color="#13C2C2"/>
-        <div :style="{whiteSpace:'nowrap',overflow:'hidden'}" slot="footer">
-            <a-trend flag="up" :style="{marginRight: '16px'}">
-              {{$t('app.analysis.week')}}
-              <span class="trendText">12%</span>
+          </a-tooltip>
+          <a-mini-progress :percent="30" :strokeWidth="8" :target="80" color="#13C2C2" />
+          <div :style="{whiteSpace:'nowrap',overflow:'hidden'}" slot="footer">
+            <!-- <a-trend flag="up" :style="{marginRight: '16px'}">
+              {{$t('app.analysis.week')}}<span class="trendText">12%</span>
+            </a-trend> -->
+            <a-trend flag="up">
+              {{$t('app.analysis.day')}}<span class="trendText">28%</span>
             </a-trend>
-            <a-trend flag="down">
-              {{$t('app.analysis.day')}}
-              <span class="trendText">11%</span>
-            </a-trend>
+          </div>
+        </a-chart-card>
+      </a-col>
+    </a-row>
+    <a-card :loading="loading" :bordered="false" :bodyStyle="{padding:'0px'}">
+        <div class="salesCard">
+          <a-tabs size="large" :tabBarStyle="{marginBottom: '24px',paddingLeft:'16px'}">
+            <div slot="tabBarExtraContent" class="salesExtraWrap">
+              <div class="salesExtra">
+                <a >
+                  {{$t('app.analysis.all-day')}}
+                </a>
+                <a class="currentDate">
+                  {{$t('app.analysis.all-week')}}
+                </a>
+                <a >
+                  {{$t('app.analysis.all-month')}}
+                </a>
+                <a >
+                  {{$t('app.analysis.all-year')}}
+                </a>
+              </div>
+              <!-- <a-range-picker style="width:256px;"/> -->
+            </div>
+            <a-tab-pane key="sales" :tab="$t('app.analysis.sales')">
+              
+            </a-tab-pane>
+            <a-tab-pane key="visits" :tab="$t('app.analysis.visits')">
+            </a-tab-pane>
+          </a-tabs>
         </div>
-      </a-chart-card>
-    </a-col>
-  </a-row>
-</a-grid-content>
+    </a-card>
+  </a-grid-content>
 </template>
 
 <script>
-import { Card, Row, Col, Tooltip, Icon } from "ant-design-vue";
+import { Card, Row, Col, Tooltip, Icon, Tabs } from "ant-design-vue";
 import GridContent from "@/components/PageWrapper/GridContent";
 import Trend from "@/components/Trend";
-import { ChartCard, Field, yuan, MiniProgress } from "@/components/Charts";
+import {
+  ChartCard,
+  Field,
+  yuan,
+  MiniProgress
+  // MiniBar,
+  // MiniArea
+} from "@/components/Charts";
 import numeral from "numeral";
-// echarts相关
-// let echarts = require("echarts/lib/echarts");
-// require("echarts/lib/chart/line");
+// import moment from 'moment';
+// import 'moment/locale/zh-cn';
+// moment.locale('zh-cn');
 
 export default {
   data: () => ({
-    loading:false
+    loading: false
   }),
   components: {
     AGridContent: GridContent,
@@ -113,14 +135,19 @@ export default {
     ATooltip: Tooltip,
     AIcon: Icon,
     ATrend: Trend,
-    AMiniProgress:MiniProgress
+    AMiniProgress: MiniProgress,
+    // AMiniBar: MiniBar,
+    // AMiniArea: MiniArea,
+    ATabs: Tabs,
+    ATabPane: Tabs.TabPane
+    // ARangePicker: DatePicker.RangePicker,
   },
   methods: {
     yuan,
-    numeral
-  },
-  mounted(){
-    
+    numeral,
   }
 };
 </script>
+<style lang="less">
+@import url("./Analysis.less");
+</style>

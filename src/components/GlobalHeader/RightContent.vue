@@ -5,9 +5,14 @@
                 <a-icon type="question-circle-o" />
             </a>
         </a-tooltip>
-        <a-tooltip title="点击刷新" placement="bottom">
+        <a-tooltip title="消息" placement="bottom">
             <a href="/" class="action">
-                <a-icon type="sync" />
+                <a-icon type="bell" />
+            </a>
+        </a-tooltip>
+        <a-tooltip :title="$t('navbar.lang')" placement="bottom">
+            <a href="javascript:;" class="action" @click='changeLang'>
+                <a-icon type="api" />
             </a>
         </a-tooltip>
         
@@ -63,10 +68,10 @@
 </template>
 
 <script>
-import { Tooltip, Icon, Dropdown, Menu, Avatar,Drawer } from "ant-design-vue";
+import { Tooltip, Icon, Dropdown, Menu, Avatar, Drawer } from "ant-design-vue";
 export default {
-  data:()=>({
-      visible:false
+  data: () => ({
+    visible: false
   }),
   components: {
     ATooltip: Tooltip,
@@ -77,6 +82,11 @@ export default {
     AMenuDivider: Menu.Divider,
     AAvatar: Avatar,
     ADrawer: Drawer
+  },
+  methods: {
+    changeLang() {
+      this.$i18n.locale = this.$i18n.locale === "en_US" ? "zh_CN" : "en_US";
+    }
   }
 };
 </script>
