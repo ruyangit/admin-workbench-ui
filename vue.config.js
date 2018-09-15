@@ -1,6 +1,7 @@
 'use strict'
 // 基础配置文件
 const path = require('path')
+const webpack = require('webpack')
 // 拼接路径
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -26,6 +27,11 @@ module.exports = {
         javascriptEnabled: true
       }
     }
+  },
+  configureWebpack: {
+    plugins: [
+      new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(zh-cn|en-us)$/)
+    ]
   },
   chainWebpack: config => {
     const svgRule = config.module.rule('svg')
