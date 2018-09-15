@@ -1,5 +1,10 @@
 <template>
     <div class="ai-header-right">
+        <a-tooltip title="Github" placement="bottom">
+            <a target="_blank" href="https://github.com/ruyangit/seed-workbench-ui.git" class="action">
+               <a-icon type="github" />
+            </a>
+        </a-tooltip>
         <a-tooltip title="使用文档" placement="bottom">
             <a target="_blank" href="javascript:;" class="action">
                 <a-icon type="question-circle-o" />

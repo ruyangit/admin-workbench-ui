@@ -91,7 +91,7 @@
                   {{$t('app.analysis.all-year')}}
                 </a>
               </div>
-              <!-- <a-range-picker style="width:256px;"/> -->
+              <a-range-picker style="width:256px;"/>
             </div>
             <a-tab-pane key="sales" :tab="$t('app.analysis.sales')">
               
@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import { Card, Row, Col, Tooltip, Icon, Tabs } from "ant-design-vue";
+import { Card, Row, Col, Tooltip, Icon, Tabs, DatePicker } from "ant-design-vue";
 import GridContent from "@/components/PageWrapper/GridContent";
 import Trend from "@/components/Trend";
 import {
@@ -139,8 +139,8 @@ export default {
     // AMiniBar: MiniBar,
     // AMiniArea: MiniArea,
     ATabs: Tabs,
-    ATabPane: Tabs.TabPane
-    // ARangePicker: DatePicker.RangePicker,
+    ATabPane: Tabs.TabPane,
+    ARangePicker: DatePicker.RangePicker,
   },
   methods: {
     yuan,

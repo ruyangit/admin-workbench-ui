@@ -1,18 +1,18 @@
 <template>
-   <!-- <LocaleProvider :locale='locale' > -->
+   <LocaleProvider :locale='locale' >
         <div class='root'><router-view /></div>
-     <!-- </LocaleProvider> -->
+     </LocaleProvider>
 </template>
 
 <script>
-// import { LocaleProvider } from "ant-design-vue";
+import { LocaleProvider } from "ant-design-vue";
 export default {
   components: {
-    // LocaleProvider
+    LocaleProvider
   },
   computed: {
-    locale(){
-      return this.$i18n.messages[this.$i18n.locale]
+    locale() {
+      return this.$i18n.messages[this.$i18n.locale];
     }
   }
 };
