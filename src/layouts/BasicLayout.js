@@ -1,7 +1,7 @@
 import './BasicLayout.less'
-import { Layout, Icon, Spin } from "ant-design-vue";
+import { Layout } from "ant-design-vue";
 import SiderMenu from "@/components/SiderMenu";
-import GlobalHeader from "@/components/GlobalHeader";
+import Header from './Header';
 import Footer from './Footer';
 import { mapGetters } from "vuex";
 const BasicLayout = {
@@ -36,9 +36,7 @@ const BasicLayout = {
             const { options: { routes } } = this.$router;
             return this.formatter(routes);
         },
-        onCollapsed() {
-            this.$store.commit('global/UpdateChangeLayoutCollapsed', !this.collapsed)
-        },
+        
         onResizeCollapsed() {
             if (window.innerWidth <= 900) {
                 this.$store.commit('global/UpdateChangeLayoutCollapsed', true)
@@ -49,7 +47,6 @@ const BasicLayout = {
     },
     computed: {
         ...mapGetters({
-            spinning: "global/getBasicLayoutSpinning",
             collapsed: "global/getChangeLayoutCollapsed"
         }),
         getContentStyle() {
@@ -74,21 +71,13 @@ const BasicLayout = {
         }
     },
     render() {
-        const { collapsed, onCollapsed, getContentStyle, spinning } = this;
+        const { collapsed, getContentStyle } = this;
         const menuData = this.getMenuData();
         return (
             <Layout class="ai-basic-layout-container">
                 <SiderMenu collapsed={collapsed} menuData={menuData} />
                 <Layout>
-                    <Layout.Header>
-                        <Icon
-                            class="trigger"
-                            type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                            onClick={onCollapsed}
-                        />
-                        <Spin spinning={spinning}></Spin>
-                        <GlobalHeader />
-                    </Layout.Header>
+                    <Header/>
                     <Layout.Content style={getContentStyle}>
                         <router-view />
                     </Layout.Content>
