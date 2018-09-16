@@ -96,7 +96,38 @@
             <a-tab-pane key="sales" :tab="$t('app.analysis.sales')">
                 <a-row>
                   <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                    1
+                      <div class="salesBar">
+                        <!-- <h4>活动实时交易情况</h4> -->
+                            <a-row>
+                              <a-col :md="6" :sm="12" :xs="24">
+                                <a-number-info
+                                  subTitle="今日交易总额"
+                                  suffix="万元"
+                                  :total="numeral(12233).format('0,0')" 
+                                />
+                              </a-col>
+                              <a-col :md="6" :sm="12" :xs="24">
+                                <a-number-info subTitle="销售目标完成率" total="92%" />
+                              </a-col>
+                              <a-col :md="6" :sm="12" :xs="24">
+                                <!-- <NumberInfo subTitle="活动剩余时间" total={<CountDown target={targetTime} />} /> -->
+                                <a-number-info subTitle="活动剩余时间" total="01:04:53"/>
+                              </a-col>
+                              <a-col :md="6" :sm="12" :xs="24">
+                                <a-number-info subTitle="每秒交易总额"
+                                  suffix="元"
+                                  :total="numeral(21234).format('0,0')"/>
+                              </a-col>
+                            </a-row>
+                            <div class="mapChart">
+                              <a-tooltip title="等待后期实现">
+                                <img
+                                  src="https://gw.alipayobjects.com/zos/rmsportal/HBWnDEUXCnGnGrRfrpKa.png"
+                                  alt="map"
+                                />
+                              </a-tooltip>
+                            </div>
+                      </div>
                   </a-col>
                   <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
                     <div class="salesRank">
@@ -104,7 +135,7 @@
                           {{$t('app.analysis.sales-ranking')}}
                         </h4>
                         <ul class="rankingList">
-                          <li v-for="(item,i) in 8" :key="i">
+                          <li v-for="(item,i) in 10" :key="i">
                             <span class="rankingItemNumber " :class="{'active':i<3}">
                               {{i + 1}}
                             </span>
@@ -121,14 +152,7 @@
                 </a-row>
             </a-tab-pane>
             <a-tab-pane key="visits" :tab="$t('app.analysis.visits')">
-              <a-row>
-                  <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                    3
-                  </a-col>
-                  <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                    4
-                  </a-col>
-                </a-row>
+              
             </a-tab-pane>
           </a-tabs>
         </div>
@@ -141,11 +165,13 @@
 import { Card, Row, Col, Tooltip, Icon, Tabs, DatePicker } from "ant-design-vue";
 import GridContent from "@/components/PageWrapper/GridContent";
 import Trend from "@/components/Trend";
+import NumberInfo from "@/components/NumberInfo";
 import {
   ChartCard,
   Field,
   yuan,
   MiniProgress
+  
   // MiniBar,
   // MiniArea
 } from "@/components/Charts";
@@ -174,6 +200,7 @@ export default {
     ATabs: Tabs,
     ATabPane: Tabs.TabPane,
     ARangePicker: DatePicker.RangePicker,
+    ANumberInfo: NumberInfo
   },
   methods: {
     yuan,
