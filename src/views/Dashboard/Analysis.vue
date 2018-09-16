@@ -94,13 +94,46 @@
               <a-range-picker style="width:256px;"/>
             </div>
             <a-tab-pane key="sales" :tab="$t('app.analysis.sales')">
-              
+                <a-row>
+                  <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
+                    1
+                  </a-col>
+                  <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
+                    <div class="salesRank">
+                        <h4 class="rankingTitle">
+                          {{$t('app.analysis.sales-ranking')}}
+                        </h4>
+                        <ul class="rankingList">
+                          <li v-for="(item,i) in 8" :key="i">
+                            <span class="rankingItemNumber " :class="{'active':i<3}">
+                              {{i + 1}}
+                            </span>
+                            <span class="rankingItemTitle">
+                              中国 🇨🇳 加油 ⛽️ ⛽ ️⛽️
+                            </span>
+                            <span class="rankingItemValue">
+                              0,0
+                            </span>
+                          </li>
+                        </ul>
+                    </div>
+                  </a-col>
+                </a-row>
             </a-tab-pane>
             <a-tab-pane key="visits" :tab="$t('app.analysis.visits')">
+              <a-row>
+                  <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
+                    3
+                  </a-col>
+                  <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
+                    4
+                  </a-col>
+                </a-row>
             </a-tab-pane>
           </a-tabs>
         </div>
     </a-card>
+    <a-row :gutter="24">8</a-row>
   </a-grid-content>
 </template>
 
