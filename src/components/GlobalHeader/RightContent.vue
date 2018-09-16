@@ -10,11 +10,19 @@
                 <a-icon type="question-circle-o" />
             </a>
         </a-tooltip>
-        <a-tooltip title="消息" placement="bottom">
-            <a href="/" class="action">
+        <!-- <a-tooltip title="消息" placement="bottom"> -->
+            <!-- <a href="/" class="action">
                 <a-icon type="bell" />
-            </a>
-        </a-tooltip>
+            </a> -->
+        <!-- </a-tooltip> -->
+        <a-notice-icon 
+            class="ai-notice"
+            className="action"
+            :count="18"
+            :popupAlign="{ offset: [20, -16] }"
+        >
+
+        </a-notice-icon>
         <a-tooltip :title="$t('navbar.lang')" placement="bottom">
             <a href="javascript:;" class="action" @click='changeLang'>
                 <a-icon type="api" />
@@ -74,6 +82,7 @@
 
 <script>
 import { Tooltip, Icon, Dropdown, Menu, Avatar, Drawer } from "ant-design-vue";
+import NoticeIcon from "@/components/NoticeIcon"
 export default {
   data: () => ({
     visible: false
@@ -86,7 +95,8 @@ export default {
     AMenuItem: Menu.Item,
     AMenuDivider: Menu.Divider,
     AAvatar: Avatar,
-    ADrawer: Drawer
+    ADrawer: Drawer,
+    ANoticeIcon: NoticeIcon
   },
   methods: {
     changeLang() {
