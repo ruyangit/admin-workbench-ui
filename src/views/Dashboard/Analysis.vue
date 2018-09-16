@@ -157,7 +157,7 @@
           </a-tabs>
         </div>
     </a-card>
-    <a-row :gutter="24">8</a-row>
+    <!-- <a-row :gutter="24">8</a-row> -->
   </a-grid-content>
 </template>
 

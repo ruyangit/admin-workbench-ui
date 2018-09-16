@@ -2,6 +2,7 @@ import './BasicLayout.less'
 import { Layout, Icon, Spin } from "ant-design-vue";
 import SiderMenu from "@/components/SiderMenu";
 import GlobalHeader from "@/components/GlobalHeader";
+import Footer from './Footer';
 import { mapGetters } from "vuex";
 const BasicLayout = {
     props: ['fixedHeader'],
@@ -91,6 +92,7 @@ const BasicLayout = {
                     <Layout.Content style={getContentStyle}>
                         <router-view />
                     </Layout.Content>
+                    <Footer/>
                 </Layout>
             </Layout>
         )
