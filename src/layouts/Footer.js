@@ -28,7 +28,7 @@ const FooterView = {
                 ]}
                 copyright={
                   <div>
-                    Copyright <Icon type="copyright" /> 2018 Jack Ma 金服体验技术部出品
+                    Copyright <Icon type="copyright" /> 2018 Ryan Ru 金服体验技术部出品
                   </div>
                 }
               />

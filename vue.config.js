@@ -22,7 +22,8 @@ module.exports = {
           'primary-color': '#42b983'
         },
         paths: [
-          resolve('node_modules')
+          resolve('node_modules'),
+          resolve('src')
         ],
         javascriptEnabled: true
       }

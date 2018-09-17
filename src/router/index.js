@@ -34,65 +34,100 @@ const router = new Router({
           component: BlankLayout,
           children: [
             { path: '/dashboard/analysis', name: 'analysis', component: () => import('@/views/Dashboard/Analysis') },
-            { path: '/dashboard/monitor', name: 'monitor', component: () => import('@/views/Dashboard/Analysis') },
-            { path: '/dashboard/workplace', name: 'workplace', component: () => import('@/views/Dashboard/Analysis') },
+            // { path: '/dashboard/monitor', name: 'monitor', component: () => import('@/views/Dashboard/Analysis') },
+            { path: '/dashboard/workplace', name: 'workplace', component: () => import('@/views/Dashboard/Workplace') },
           ]
         },
+        // {
+        //   path: '/form',
+        //   name: 'form',
+        //   icon: 'form',
+        //   component: BlankLayout,
+        //   children: [
+        //     { path: '/form/basic-form', name: 'basicform', component: () => import('@/views/Dashboard/Analysis') },
+        //     {
+        //       path: '/form/step-form',
+        //       name: 'stepform',
+        //       component: BlankLayout,
+        //       hideChildrenInMenu: true,
+        //       children: [
+        //         {
+        //           path: '/form/step-form/info',
+        //           name: 'info',
+        //           component: () => import('@/views/Dashboard/Analysis'),
+        //         },
+        //       ]
+        //     },
+        //     { path: '/form/advanced-form', name: 'advancedform', component: () => import('@/views/Dashboard/Analysis') },
+        //   ]
+        // },
+        // {
+        //   path: '/list',
+        //   icon: 'table',
+        //   name: 'list',
+        //   component: BlankLayout,
+        //   children: [
+        //     {
+        //       path: '/list/search',
+        //       name: 'searchlist',
+        //       component: BlankLayout,
+        //       children: [
+        //         {
+        //           path: '/list/search/articles',
+        //           name: 'articles',
+        //         },
+        //         {
+        //           path: '/list/search/projects',
+        //           name: 'projects',
+        //         },
+        //         {
+        //           path: '/list/search/applications',
+        //           name: 'applications',
+        //         },
+        //       ]
+        //     }
+        //   ]
+        // },
+        // {
+        //   path: '/profile',
+        //   icon: 'profile',
+        //   name: 'profile',
+        // },
         {
-          path: '/form',
-          name: 'form',
-          icon: 'form',
+          path: '/system',
+          icon: 'setting',
+          name: 'system',
           component: BlankLayout,
           children: [
-            { path: '/form/basic-form', name: 'basicform', component: () => import('@/views/Dashboard/Analysis') },
             {
-              path: '/form/step-form',
-              name: 'stepform',
-              component: BlankLayout,
-              hideChildrenInMenu: true,
-              children: [
-                {
-                  path: '/form/step-form/info',
-                  name: 'info',
-                  component: () => import('@/views/Dashboard/Analysis'),
-                },
-              ]
-            },
-            { path: '/form/advanced-form', name: 'advancedform', component: () => import('@/views/Dashboard/Analysis') },
-          ]
-        },
-        {
-          path: '/list',
-          icon: 'table',
-          name: 'list',
-          component: BlankLayout,
-          children: [
-            {
-              path: '/list/search',
-              name: 'searchlist',
+              path: '/system/setting',
+              name: 'setting',
               component: BlankLayout,
               children: [
                 {
-                  path: '/list/search/articles',
-                  name: 'articles',
+                  path: '/system/setting/menu',
+                  name: 'menu',
                 },
                 {
-                  path: '/list/search/projects',
-                  name: 'projects',
+                  path: '/system/setting/module',
+                  name: 'module',
                 },
                 {
-                  path: '/list/search/applications',
-                  name: 'applications',
+                  path: '/system/setting/config',
+                  name: 'config',
+                },
+                {
+                  path: '/system/setting/dict',
+                  name: 'dict',
+                },
+                {
+                  path: '/system/setting/area',
+                  name: 'area',
                 },
               ]
             }
           ]
         },
-        {
-          path: '/profile',
-          icon: 'profile',
-          name: 'profile',
-        }
       ]
     },
 

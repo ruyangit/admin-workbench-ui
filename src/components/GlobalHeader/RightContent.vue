@@ -98,7 +98,7 @@
                 src='https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
                 alt="avatar"
               />
-              <span class="name">Jack Ma</span>
+              <span class="name">Ryan Ru</span>
             </span>
 
             <a-menu slot="overlay" class="menu">

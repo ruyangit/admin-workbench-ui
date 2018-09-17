@@ -1,10 +1,14 @@
 import './BasicLayout.less'
 import { Layout } from "ant-design-vue";
+import pathToRegexp from 'path-to-regexp';
 import SiderMenu from "@/components/SiderMenu";
 import Header from './Header';
 import Footer from './Footer';
 import { mapGetters } from "vuex";
 const BasicLayout = {
+    data:()=>({
+        // breadcrumbNameMap: this.getBreadcrumbNameMap(),
+    }),
     props: ['fixedHeader'],
     methods: {
         formatter(data, parentPath = '', parentAuthority, parentName) {
@@ -36,7 +40,41 @@ const BasicLayout = {
             const { options: { routes } } = this.$router;
             return this.formatter(routes);
         },
-        
+        /**
+         * 获取面包屑映射
+         * @param {Object} menuData 菜单配置
+         */
+        getBreadcrumbNameMap() {
+            const routerMap = {};
+            const mergeMenuAndRouter = data => {
+            data.forEach(menuItem => {
+                if (menuItem.menus) {
+                mergeMenuAndRouter(menuItem.menus);
+                }
+                // Reduce memory usage
+                routerMap[menuItem.path] = menuItem;
+            });
+            };
+            mergeMenuAndRouter(this.getMenuData());
+            return routerMap;
+        },
+
+        matchParamsPath(pathname) {
+            const breadcrumbNameMap = this.getBreadcrumbNameMap()
+            const pathKey = Object.keys(breadcrumbNameMap).find(key =>
+                pathToRegexp(key).test(pathname)
+            );
+            return breadcrumbNameMap[pathKey];
+        },
+
+        getPageTitle(pathname){
+            const currRouterData = this.matchParamsPath(pathname);
+            if (!currRouterData) {
+                return 'Ant Design Pro';
+            }
+            const message = this.$t(currRouterData.locale || currRouterData.name) 
+            return `${message} - Ant Design Pro`;
+        },
         onResizeCollapsed() {
             if (window.innerWidth <= 900) {
                 this.$store.commit('global/UpdateChangeLayoutCollapsed', true)
@@ -44,6 +82,10 @@ const BasicLayout = {
                 this.$store.commit('global/UpdateChangeLayoutCollapsed', false)
             }
         }
+    },
+    updated() {
+        // this.breadcrumbNameMap = this.getBreadcrumbNameMap();
+        // document.title = this.getPageTitle(to.path)
     },
     computed: {
         ...mapGetters({
@@ -56,13 +98,24 @@ const BasicLayout = {
             }
         }
     },
+    beforeRouteEnter (to, from, next) {
+        next(vm => {
+            // 通过 `vm` 访问组件实例
+            document.title = vm.getPageTitle(to.path)
+            // console.log(vm);
+        })
+    },
     beforeRouteUpdate(to, from, next) {
         this.$store.commit('global/UpdateBasicLayoutSpinning', true)
+        document.title = this.getPageTitle(to.path)
         this.$nextTick(() => {
             next();
         })
     },
     mounted() {
+        // console.log(this.getBreadcrumbNameMap());
+        // console.log(this.$route.path);
+
         this.onResizeCollapsed()
 
         window.onresize = () => {
