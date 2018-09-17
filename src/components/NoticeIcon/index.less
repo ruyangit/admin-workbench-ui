@@ -3,12 +3,7 @@
 @ai-notice-prefix: ~"@{ai-prefix}-notice";
 
 .@{ai-notice-prefix}{
-    .popover {
-        width: 336px;
-        :global(.ant-popover-inner-content) {
-          padding: 0;
-        }
-      }
+    
       
       &.noticeButton {
         cursor: pointer;
@@ -21,15 +16,23 @@
         padding: 4px;
       }
       
-      .tabs {
-        :global {
-          .ant-tabs-nav-scroll {
-            text-align: center;
-          }
-          .ant-tabs-bar {
-            margin-bottom: 4px;
-          }
-        }
+      
+}
+
+.@{ai-notice-prefix}-popover {
+  width: 336px;
+  :global(.ant-popover-inner-content) {
+    padding: 0;
+  }
+  .tabs {
+    :global {
+      .ant-tabs-nav-scroll {
+        text-align: center;
       }
+      .ant-tabs-bar {
+        margin-bottom: 4px;
+      }
+    }
+  }
 }
 
