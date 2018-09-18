@@ -162,7 +162,15 @@
 </template>
 
 <script>
-import { Card, Row, Col, Tooltip, Icon, Tabs, DatePicker } from "ant-design-vue";
+import {
+  Card,
+  Row,
+  Col,
+  Tooltip,
+  Icon,
+  Tabs,
+  DatePicker
+} from "ant-design-vue";
 import GridContent from "@/components/PageWrapper/GridContent";
 import Trend from "@/components/Trend";
 import NumberInfo from "@/components/NumberInfo";
@@ -171,7 +179,7 @@ import {
   Field,
   yuan,
   MiniProgress
-  
+
   // MiniBar,
   // MiniArea
 } from "@/components/Charts";
@@ -204,7 +212,7 @@ export default {
   },
   methods: {
     yuan,
-    numeral,
+    numeral
   }
 };
 </script>

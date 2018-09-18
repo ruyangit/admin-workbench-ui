@@ -4,11 +4,9 @@ import pathToRegexp from 'path-to-regexp';
 import SiderMenu from "@/components/SiderMenu";
 import Header from './Header';
 import Footer from './Footer';
+import bus from '@/utils/bus.js'
 import { mapGetters } from "vuex";
 const BasicLayout = {
-    data:()=>({
-        // breadcrumbNameMap: this.getBreadcrumbNameMap(),
-    }),
     props: ['fixedHeader'],
     methods: {
         formatter(data, parentPath = '', parentAuthority, parentName) {
@@ -102,7 +100,6 @@ const BasicLayout = {
         next(vm => {
             // 通过 `vm` 访问组件实例
             document.title = vm.getPageTitle(to.path)
-            // console.log(vm);
         })
     },
     beforeRouteUpdate(to, from, next) {
@@ -113,9 +110,6 @@ const BasicLayout = {
         })
     },
     mounted() {
-        // console.log(this.getBreadcrumbNameMap());
-        // console.log(this.$route.path);
-
         this.onResizeCollapsed()
 
         window.onresize = () => {
@@ -126,6 +120,7 @@ const BasicLayout = {
     render() {
         const { collapsed, getContentStyle } = this;
         const menuData = this.getMenuData();
+        bus.breadcrumbNameMap = this.getBreadcrumbNameMap()
         return (
             <Layout class="ai-basic-layout-container">
                 <SiderMenu collapsed={collapsed} menuData={menuData} />

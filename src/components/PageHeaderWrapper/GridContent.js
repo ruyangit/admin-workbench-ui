@@ -2,7 +2,7 @@ import './GridContent.less'
 const GridContent = {
     props: ["contentWidth"],
     render() {
-        const { contentWidth, $slots } = this.props;
+        const { contentWidth, $slots } = this;
         const children = $slots.default;
         let className = `main`;
         if (contentWidth === 'Fixed') {
