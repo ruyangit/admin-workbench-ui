@@ -112,18 +112,22 @@ const router = new Router({
                 {
                   path: '/system/setting/module',
                   name: 'module',
+                  component: () => import('@/views/System/Role')
                 },
                 {
                   path: '/system/setting/config',
                   name: 'config',
+                  component: () => import('@/views/System/Role')
                 },
                 {
                   path: '/system/setting/dict',
                   name: 'dict',
+                  component: () => import('@/views/System/Role')
                 },
                 {
                   path: '/system/setting/area',
                   name: 'area',
+                  component: () => import('@/views/System/Role')
                 },
               ]
             },
@@ -135,6 +139,7 @@ const router = new Router({
             {
               path: '/system/admin',
               name: 'admin',
+              component: () => import('@/views/System/Role')
             }
           ]
         },

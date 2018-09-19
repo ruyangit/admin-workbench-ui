@@ -37,7 +37,7 @@ const mutations = {
             data: results,
             pagination: {
                 total: 200,
-                defaultPageSize: config.results
+                pageSize: config.results
             }
         }
         // console.log(state.users.pagination)

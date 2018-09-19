@@ -238,13 +238,15 @@ const columns = [
   {
     title: "用户名",
     dataIndex: "login",
+    sorter: true,
+    width: "12%",
     scopedSlots: { customRender: "login" }
   },
   {
     title: "姓名",
     dataIndex: "name",
     sorter: true,
-    width: "20%",
+    width: "15%",
     scopedSlots: { customRender: "name" }
   },
   {
