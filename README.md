@@ -134,6 +134,15 @@ chainWebpack: config => {
 ```
 3. 组件及页面API说明待后续时间充裕补充上来。
 
+#### 计划
+* 后续完善UI中所需的组件
+* 对接完成自己开发的后台系统
+  [SpringbootSeed](https://gitee.com/ruyangit/springboot-seed)
+* 关于阿里的g2 或者百度的 echarts 对于我来说感觉有点大，之后看看图表相关的简化一下
+* 代码的规范及API文档的编写
+* 代码的CI，CD测试
+
+
 #### 参与贡献
 
 1. Fork 本项目
