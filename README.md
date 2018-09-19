@@ -4,8 +4,8 @@
 [SeedWorkbenchUi](https://github.com/ruyangit/seed-workbench-ui) 简洁的中台UI，vuejs 开发，组件化，模块化 See: <a href="https://ruyangit.gitee.io/seed-workbench-ui">demo</a>
 
 <p align="center">
-  <a><img src="https://img.shields.io/github/release/ruyangit/seed-workbench-ui.svg"/></a>
-  <a><img src="https://badge.fury.io/js/%40seed-workbench-ui%2Fice-scaffold.svg"/></a>
+  <!-- <a><img src="https://img.shields.io/github/release/ruyangit/seed-workbench-ui.svg"/></a>
+  <a><img src="https://badge.fury.io/js/%40seed-workbench-ui%2Fice-scaffold.svg"/></a> -->
   <a><img src="https://img.shields.io/github/last-commit/ruyangit/seed-workbench-ui.svg"/></a>
   <a><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg"/></a>
   <a><img src="https://img.shields.io/github/forks/ruyangit/seed-workbench-ui.svg"/></a>
@@ -20,7 +20,7 @@
 ![banner](https://ruyangit.gitee.io/bgcdn/phone_login.jpg)
 ![banner](https://ruyangit.gitee.io/bgcdn/register.jpg)
 
-####预览
+#### 预览
 [预览地址](https://ruyangit.gitee.io/seed-workbench-ui)
 
 > 预览部署在 Github Page ，如果您访问时由于网络原因卡在载入界面或者白屏，请克隆或者下载本仓库在本地运行查看效果。
@@ -76,7 +76,7 @@ if (process.env.NODE_ENV === 'production') {
   baseUrl = '/seed-workbench-ui/'
 }
 
-// 主题样式全局修改替换这里
+// 主题样式全局修改替换
 css: {
   loaderOptions: {
     less: {
