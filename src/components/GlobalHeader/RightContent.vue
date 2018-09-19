@@ -1,20 +1,37 @@
 <template>
     <div class="ai-header-right">
-        <a-tooltip title="Github" placement="bottom">
-            <a target="_blank" href="https://github.com/ruyangit/seed-workbench-ui.git" class="action">
-               <a-icon type="github" />
-            </a>
-        </a-tooltip>
         <a-tooltip title="使用文档" placement="bottom">
-            <a target="_blank" href="javascript:;" class="action">
+            <a target="_blank" href="javascript:;" class="action" @click="success">
                 <a-icon type="question-circle-o" />
             </a>
         </a-tooltip>
-        <!-- <a-tooltip title="消息" placement="bottom"> -->
-            <!-- <a href="/" class="action">
-                <a-icon type="bell" />
-            </a> -->
+        <!-- <a-tooltip title="Code" placement="bottom"> -->
+            <!-- <a target="_blank" href="https://github.com/ruyangit/seed-workbench-ui.git" class="action"> -->
+            <!-- <span class="action"> -->
+               <!-- <a-icon type="codepen" theme="outlined" /> -->
+            <!-- </span> -->
+            <!-- </a> -->
         <!-- </a-tooltip> -->
+        <a-dropdown placement="bottomRight" >
+            <span class="action">
+               <a-icon type="codepen" theme="outlined" />
+            </span>
+
+            <a-menu slot="overlay" @click="handleMenuClick">
+                <a-menu-item key="gitee">
+                    <!-- <a target="_blank" href="https://github.com/ruyangit/seed-workbench-ui.git"> -->
+                    <a-icon type="slack-square" theme="outlined" />
+                    Gitee （开源中国）
+                    <!-- </a> -->
+                </a-menu-item>
+                <a-menu-item key="github">
+                    <!-- <a target="_blank" href="https://github.com/ruyangit/seed-workbench-ui.git"> -->
+                    <a-icon type="github"/>
+                    Github （同性交友）
+                    <!-- </a> -->
+                </a-menu-item>
+            </a-menu>
+          </a-dropdown>
         <a-notice-icon 
             class="ai-notice"
             className="action"
@@ -134,15 +151,19 @@
             @close="()=>{this.visible = false}"
             :visible="visible"
             >
-            <p>设置一</p>
-            <p>设置二</p>
-            <p>设置三</p>
+            <p>风格</p>
+            <a-divider/>
+            <p>主题</p>
+            <a-divider/>
+            <p>导航</p>
+            <a-divider/>
+            <p>其他</p>
             </a-drawer>
     </div>
 </template>
 
 <script>
-import { Tooltip, Icon, Dropdown, Menu, Avatar, Drawer } from "ant-design-vue";
+import { Tooltip, Icon, Dropdown, Menu, Avatar, Drawer, Modal, Divider } from "ant-design-vue";
 import NoticeIcon from "@/components/NoticeIcon"
 export default {
   data: () => ({
@@ -158,12 +179,33 @@ export default {
     AAvatar: Avatar,
     ADrawer: Drawer,
     ANoticeIcon: NoticeIcon,
-    ANoticeIconTab: NoticeIcon.Tab
+    ANoticeIconTab: NoticeIcon.Tab,
+
+    ADivider: Divider
   },
   methods: {
     changeLang() {
       this.$i18n.locale = this.$i18n.locale === "en_US" ? "zh_CN" : "en_US";
-    }
+    },
+    handleMenuClick(e){
+       if(e.key==='gitee'){
+           window.open('https://gitee.com/ruyangit/seed-workbench-ui.git','_blank')
+       }else{
+           window.open('https://github.com/ruyangit/seed-workbench-ui.git','_blank')
+       }
+    },
+    success() {
+      Modal.success({
+        title: '友好的一个提示',
+        content: (  // JSX support
+          <div>
+            <p>使用文档，组件API，等说明。正在加班整理中...</p>
+            <p>您可以先 Star 一个，追踪后面的更新。</p>
+            <p>欢迎 Pr。</p>
+          </div>
+        ),
+      });
+    },
   }
 };
 </script>

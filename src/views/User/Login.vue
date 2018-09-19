@@ -124,7 +124,7 @@ export default {
         this.active.push("captcha");
       }
     },
-    handleSubmit() {
+    handleSubmit(e) {
       this.form.validateFields(
         this.active,
         {
