@@ -107,6 +107,7 @@ const router = new Router({
                 {
                   path: '/system/setting/menu',
                   name: 'menu',
+                  component: () => import('@/views/System/Menu')
                 },
                 {
                   path: '/system/setting/module',
@@ -125,6 +126,15 @@ const router = new Router({
                   name: 'area',
                 },
               ]
+            },
+            {
+              path: '/system/role',
+              name: 'role',
+              component: () => import('@/views/System/Role')
+            },
+            {
+              path: '/system/admin',
+              name: 'admin',
             }
           ]
         },

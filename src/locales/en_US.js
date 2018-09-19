@@ -37,6 +37,17 @@ export default {
   'menu.account.center': 'Account Center',
   'menu.account.settings': 'Account Settings',
   'menu.account.trigger': 'Trigger Error',
+  //---
+  'menu.system': '系统管理',
+  'menu.system.setting': '系统设置',
+  'menu.system.setting.menu': '菜单管理',
+  'menu.system.setting.module': '模块管理',
+  'menu.system.setting.config': '配置管理',
+  'menu.system.setting.dict': '字典管理',
+  'menu.system.setting.area': '行政区划',
+  'menu.system.role': '权限管理',
+  'menu.system.admin': '系统管理员',
+  //---
   'app.home.introduce': 'introduce',
   'app.analysis.test': 'Gongzhuan No.{no} shop',
   'app.analysis.introduce': 'Introduce',

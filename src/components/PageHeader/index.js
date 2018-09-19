@@ -1,7 +1,7 @@
 import './index.less'
 import pathToRegexp from 'path-to-regexp';
 import { Breadcrumb } from "ant-design-vue";
-import bus from '@/utils/bus.js'
+import eventBus from '@/utils/eventBus.js'
 export function urlToList(url) {
     const urllist = url.split('/').filter(i => i);
     return urllist.map((urlItem, index) => `/${urllist.slice(0, index + 1).join('/')}`);
@@ -48,12 +48,12 @@ const PageHeader = {
         },
         getBreadcrumbProps() {
             const { params, $router, $route } = this;
-            const { breadcrumbNameMap } = bus;
+            const { breadcrumbNameMap } = eventBus;
             return {
                 router: $router,
                 params,
                 route: $route,
-                breadcrumbNameMap: bus.breadcrumbNameMap,
+                breadcrumbNameMap
             };
         },
         conversionBreadcrumbList() {

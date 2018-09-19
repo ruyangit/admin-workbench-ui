@@ -2,9 +2,9 @@ import './index.less'
 import GridContent from './GridContent';
 import PageHeader from '@/components/PageHeader';
 const PageHeaderWrapper = {
-    props: ["contentWidth","wrapperClassName","loading","content","extraContent","breadcrumbList"],
+    props: ["contentWidth","wrapperClassName","loading","content","extraContent","breadcrumbList","title"],
     render(){
-        const {$slots,contentWidth,wrapperClassName,content,extraContent,breadcrumbList} = this
+        const {$slots,contentWidth,wrapperClassName,content,extraContent,breadcrumbList,title} = this
         const children = $slots.default;
         const top = $slots.top;
         return (
@@ -16,9 +16,7 @@ const PageHeaderWrapper = {
                 content={content}
                 extraContent={extraContent}
                 breadcrumbList={breadcrumbList}
-                // {...value}
-                // key="pageheader"
-                // {...restProps}
+                title={title}
                 linkElement={'router-link'}
                 itemRender={item => {
                   if (item.locale) {

@@ -46,6 +46,9 @@ export default {
   'menu.system.setting.config': '配置管理',
   'menu.system.setting.dict': '字典管理',
   'menu.system.setting.area': '行政区划',
+  'menu.system.role': '权限管理',
+  'menu.system.admin': '系统管理员',
+  //---
   'app.home.introduce': '介绍',
   'app.analysis.test': '工专路 {no} 号店',
   'app.analysis.introduce': '指标说明',

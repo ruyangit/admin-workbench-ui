@@ -118,7 +118,7 @@ export default {
     const openKeys = this.getOpenKeys(path);
     return (
       <a-menu
-        openKeys={openKeys}
+        defaultOpenKeys={openKeys}
         selectedKeys={[path]}
         key="Menu"
         mode={this.mode}

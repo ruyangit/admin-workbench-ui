@@ -4,7 +4,7 @@ import pathToRegexp from 'path-to-regexp';
 import SiderMenu from "@/components/SiderMenu";
 import Header from './Header';
 import Footer from './Footer';
-import bus from '@/utils/bus.js'
+import eventBus from '@/utils/eventBus.js'
 import { mapGetters } from "vuex";
 const BasicLayout = {
     props: ['fixedHeader'],
@@ -120,7 +120,7 @@ const BasicLayout = {
     render() {
         const { collapsed, getContentStyle } = this;
         const menuData = this.getMenuData();
-        bus.breadcrumbNameMap = this.getBreadcrumbNameMap()
+        eventBus.breadcrumbNameMap = this.getBreadcrumbNameMap()
         return (
             <Layout class="ai-basic-layout-container">
                 <SiderMenu collapsed={collapsed} menuData={menuData} />
