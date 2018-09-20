@@ -1,7 +1,8 @@
 import './index.less'
 import pathToRegexp from 'path-to-regexp';
-import { Breadcrumb } from "ant-design-vue";
+import { Breadcrumb,Tabs } from "ant-design-vue";
 import eventBus from '@/utils/eventBus.js'
+const {TabPane} = Tabs
 export function urlToList(url) {
     const urllist = url.split('/').filter(i => i);
     return urllist.map((urlItem, index) => `/${urllist.slice(0, index + 1).join('/')}`);
@@ -19,7 +20,7 @@ export const getBreadcrumb = (breadcrumbNameMap, url) => {
     return breadcrumb || {};
 };
 const PageHeader = {
-    props: ["wide", "home", "title", "action", "content", "extraContent", "breadcrumbList", "breadcrumbSeparator", "itemRender", "linkElement"],
+    props: ["wide", "home", "title", "action", "content", "extraContent", "breadcrumbList", "breadcrumbSeparator", "itemRender", "linkElement","tabList", "tabActiveKey", "tabBarExtraContent","tabChange"],
     methods: {
         conversionFromProps() {
             const { breadcrumbList, breadcrumbSeparator, itemRender, linkElement = 'a' } = this;
@@ -144,7 +145,7 @@ const PageHeader = {
         // }
     },
     render() {
-        const { wide = false, logo, title, action, content, extraContent } = this
+        const { wide = false, logo, title, action, content, extraContent, tabList, tabActiveKey, tabBarExtraContent, tabChange } = this
         const breadcrumb = this.conversionBreadcrumbList();
         return (
             <div class="pageHeader">
@@ -163,6 +164,19 @@ const PageHeader = {
                             </div>
                         </div>
                     </div>
+                    {tabList && tabList.length ? (
+                    <Tabs
+                        size="small"
+                        class="tabs"
+                        defaultActiveKey={tabActiveKey}
+                        onChange={tabChange}
+                        tabBarExtraContent={tabBarExtraContent}
+                    >
+                        {tabList.map(item => (
+                        <TabPane tab={item.tab} key={item.key} />
+                        ))}
+                    </Tabs>
+                    ) : null}
                 </div>
             </div>
         )
