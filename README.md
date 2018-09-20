@@ -17,6 +17,7 @@
 ![banner](https://ruyangit.gitee.io/bgcdn/analysis.jpg)
 ![banner](https://ruyangit.gitee.io/bgcdn/workplace.jpg)
 ![banner](https://ruyangit.gitee.io/bgcdn/list.jpg)
+![banner](https://ruyangit.gitee.io/bgcdn/setting.jpg)
 ![banner](https://ruyangit.gitee.io/bgcdn/phone_login.jpg)
 ![banner](https://ruyangit.gitee.io/bgcdn/register.jpg)
 

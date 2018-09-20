@@ -140,34 +140,21 @@
             </a-menu>
           </a-dropdown>
           <a-tooltip title="预览设置" placement="bottom">
-            <a @click="()=>{this.visible=!this.visible}" href="javascript:;" class="action" :style="{marginRight: '12px'}">
+            <a @click="()=>{this.collapse=!this.collapse}" href="javascript:;" class="action" :style="{marginRight: '12px'}">
                 <a-icon type="ellipsis" />
             </a>
-           </a-tooltip>
-          <a-drawer
-            title="我是一个抽屉"
-            placement="right"
-            :closable="false"
-            @close="()=>{this.visible = false}"
-            :visible="visible"
-            >
-            <p>风格</p>
-            <a-divider/>
-            <p>主题</p>
-            <a-divider/>
-            <p>导航</p>
-            <a-divider/>
-            <p>其他</p>
-            </a-drawer>
+          </a-tooltip>
+          <a-setting-drawer :collapse="collapse"/>
     </div>
 </template>
 
 <script>
-import { Tooltip, Icon, Dropdown, Menu, Avatar, Drawer, Modal, Divider } from "ant-design-vue";
+import { Tooltip, Icon, Dropdown, Menu, Avatar, Modal, Divider } from "ant-design-vue";
 import NoticeIcon from "@/components/NoticeIcon"
+import SettingDrawer from "@/components/SettingDrawer"
 export default {
   data: () => ({
-    visible: false
+    collapse: false
   }),
   components: {
     ATooltip: Tooltip,
@@ -177,11 +164,11 @@ export default {
     AMenuItem: Menu.Item,
     AMenuDivider: Menu.Divider,
     AAvatar: Avatar,
-    ADrawer: Drawer,
     ANoticeIcon: NoticeIcon,
     ANoticeIconTab: NoticeIcon.Tab,
 
-    ADivider: Divider
+    ADivider: Divider,
+    ASettingDrawer: SettingDrawer
   },
   methods: {
     changeLang() {
