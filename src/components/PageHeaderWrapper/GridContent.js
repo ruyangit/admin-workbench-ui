@@ -1,8 +1,14 @@
 import './GridContent.less'
+import { mapGetters } from "vuex";
 const GridContent = {
-    props: ["contentWidth"],
+    computed: {
+        ...mapGetters({
+            settings: "global/settings"
+        })
+    },
     render() {
-        const { contentWidth, $slots } = this;
+        const {  $slots } = this;
+        const { contentWidth } = this.settings;
         const children = $slots.default;
         let className = `main`;
         if (contentWidth === 'Fixed') {

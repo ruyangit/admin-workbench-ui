@@ -27,7 +27,6 @@ const ThemeColor = {
     props: ["colors", "title", "value"],
     methods:{
         handleChange(color) {
-            this.$emit('colorInput', color);
             this.$emit('change', color);
         },
     },

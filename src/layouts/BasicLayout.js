@@ -5,9 +5,13 @@ import SiderMenu from "@/components/SiderMenu";
 import Header from './Header';
 import Footer from './Footer';
 import eventBus from '@/utils/eventBus.js'
+import logo from "@/assets/logo.png";
 import { mapGetters } from "vuex";
 const BasicLayout = {
-    props: ['fixedHeader'],
+    data: () => ({
+        layout: 'topmenu',
+        logo
+    }),
     methods: {
         formatter(data, parentPath = '', parentAuthority, parentName) {
             return data.map(item => {
@@ -45,13 +49,13 @@ const BasicLayout = {
         getBreadcrumbNameMap() {
             const routerMap = {};
             const mergeMenuAndRouter = data => {
-            data.forEach(menuItem => {
-                if (menuItem.menus) {
-                mergeMenuAndRouter(menuItem.menus);
-                }
-                // Reduce memory usage
-                routerMap[menuItem.path] = menuItem;
-            });
+                data.forEach(menuItem => {
+                    if (menuItem.menus) {
+                        mergeMenuAndRouter(menuItem.menus);
+                    }
+                    // Reduce memory usage
+                    routerMap[menuItem.path] = menuItem;
+                });
             };
             mergeMenuAndRouter(this.getMenuData());
             return routerMap;
@@ -65,12 +69,12 @@ const BasicLayout = {
             return breadcrumbNameMap[pathKey];
         },
 
-        getPageTitle(pathname){
+        getPageTitle(pathname) {
             const currRouterData = this.matchParamsPath(pathname);
             if (!currRouterData) {
                 return 'Ant Design Pro';
             }
-            const message = this.$t(currRouterData.locale || currRouterData.name) 
+            const message = this.$t(currRouterData.locale || currRouterData.name)
             return `${message} - Ant Design Pro`;
         },
         onResizeCollapsed() {
@@ -87,16 +91,17 @@ const BasicLayout = {
     },
     computed: {
         ...mapGetters({
-            collapsed: "global/getChangeLayoutCollapsed"
+            collapsed: "global/getChangeLayoutCollapsed",
+            settings: "global/settings"
         }),
         getContentStyle() {
             return {
                 margin: '24px 24px 0',
-                paddingTop: this.fixedHeader ? 64 : 0,
+                paddingTop: this.settings.fixedHeader ? 64 : 0,
             }
-        }
+        },
     },
-    beforeRouteEnter (to, from, next) {
+    beforeRouteEnter(to, from, next) {
         next(vm => {
             // 通过 `vm` 访问组件实例
             document.title = vm.getPageTitle(to.path)
@@ -118,18 +123,24 @@ const BasicLayout = {
         }
     },
     render() {
-        const { collapsed, getContentStyle } = this;
+        const { collapsed, getContentStyle, logo } = this;
+        const { layout } = this.settings;
+        const isTop = layout === 'topmenu';
+        const isMobile = false;
         const menuData = this.getMenuData();
         eventBus.breadcrumbNameMap = this.getBreadcrumbNameMap()
         return (
             <Layout class="ai-basic-layout-container">
-                <SiderMenu collapsed={collapsed} menuData={menuData} />
+                {isTop && !isMobile ? null : (
+                    <SiderMenu collapsed={collapsed} menuData={menuData} logo={logo}/>
+                )}
+
                 <Layout>
-                    <Header/>
+                    <Header menuData={menuData} logo={logo}/>
                     <Layout.Content style={getContentStyle}>
                         <router-view />
                     </Layout.Content>
-                    <Footer/>
+                    <Footer />
                 </Layout>
             </Layout>
         )

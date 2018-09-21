@@ -5,8 +5,10 @@ export default {
   props: {
     collapsed: { default: false, type: Boolean },
     theme: { default: "dark", type: String },
+    layout: { type: String },
     mode: { default: "inline", type: String },
-    menuData: { default: [], type: Array }
+    menuData: { default: [], type: Array },
+    styles: { type: String }
   },
   components: {
     AMenu: Menu,
@@ -110,12 +112,16 @@ export default {
     },
     getOpenKeys(path) {
       const openKeys = this.urlToList(path);
+      if (this.layout === "topmenu") {
+        return null
+      }
       return openKeys.filter(item => item !== path);
     }
   },
   render() {
     const { path } = this.$route;
     const openKeys = this.getOpenKeys(path);
+    
     return (
       <a-menu
         defaultOpenKeys={openKeys}
@@ -124,6 +130,7 @@ export default {
         mode={this.mode}
         theme={this.theme}
         collapsed={this.collapsed}
+        style={this.styles}
       >
         {this.getNavMenuItems(this.menuData)}
       </a-menu>

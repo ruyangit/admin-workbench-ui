@@ -6,6 +6,7 @@ import Vuei18n from 'vue-i18n'
 import { sync } from 'vuex-router-sync'
 import zh_CN from "./locales/zh_CN";
 import en_US from "./locales/en_US";
+import defaultSettings from './defaultSettings'
 
 Vue.config.productionTip = false
 
@@ -21,6 +22,9 @@ const i18n = new Vuei18n({
 })
 
 sync(store, router)
+
+//加载默认设置
+store.commit('global/UpdateDefaultSettings', defaultSettings)
 
 new Vue({
   router,

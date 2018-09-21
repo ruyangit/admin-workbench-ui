@@ -171,7 +171,7 @@ import {
   Tabs,
   DatePicker
 } from "ant-design-vue";
-import GridContent from "@/components/PageWrapper/GridContent";
+import GridContent from "@/components/PageHeaderWrapper/GridContent";
 import Trend from "@/components/Trend";
 import NumberInfo from "@/components/NumberInfo";
 import {

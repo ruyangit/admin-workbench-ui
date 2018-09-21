@@ -1,23 +1,20 @@
 <template>
-  <a-layout-sider v-model="collapsed" width="256" :class="`ai-sider-menu sider ${fixSiderbar?'fixSiderbar':'',light?'light':''}`">
+  <a-layout-sider v-model="collapsed" width="256" :class="`ai-sider-menu sider ${fixSiderbar?'fixSiderbar':'',settings.navTheme==='light'?'light':'dark'}`" :theme="settings.navTheme">
     <div class="logo" key="logo" id="logo">
       <router-link to="/">
         <img :src="logo" alt="logo" />
         <h1>Ant Design Pro</h1>
       </router-link>
     </div>
-    <a-base-menu :collapsed="collapsed" :menuData="menuData" />
+    <a-base-menu :collapsed="collapsed" :menuData="menuData" :theme="settings.navTheme" :layout="settings.layout" styles="padding: '16px 0'; width: '100%'"/>
   </a-layout-sider>
 </template>
 
 <script>
 import { Layout } from "ant-design-vue";
 import ABaseMenu from "@/components/SiderMenu/BaseMenu";
-import logo from "@/assets/logo.png";
+import { mapGetters } from "vuex";
 export default {
-  data: () => ({
-    logo: logo
-  }),
   props: {
     collapsed: {
       default: false,
@@ -27,14 +24,16 @@ export default {
       default: false,
       type: Boolean
     },
-    light: {
-      default: false,
-      type: Boolean
-    },
     menuData: {
       default: [],
       type: Array
-    }
+    },
+    logo: { type: String }
+  },
+  computed: {
+    ...mapGetters({
+      settings: "global/settings"
+    })
   },
   components: {
     ALayoutSider: Layout.Sider,

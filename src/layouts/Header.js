@@ -1,33 +1,51 @@
 import './Header.less'
-import { Layout, Icon, Spin } from "ant-design-vue";
+import { Layout } from "ant-design-vue";
 import GlobalHeader from '@/components/GlobalHeader';
+import TopNavHeader from '@/components/TopNavHeader';
 import { mapGetters } from "vuex";
 const { Header } = Layout;
 const HeaderView = {
+    props: ['menuData', 'logo'],
     computed: {
         ...mapGetters({
-            spinning: "global/getBasicLayoutSpinning",
-            collapsed: "global/getChangeLayoutCollapsed"
-        }),
-    },
-    methods: {
-        onCollapsed() {
-            this.$store.commit('global/UpdateChangeLayoutCollapsed', !this.collapsed)
-        },
+            settings: "global/settings"
+        })
     },
     render() {
-        const { spinning, collapsed, onCollapsed } = this
+        const { menuData, logo } = this
+        const { layout, navTheme,fixedHeader } = this.settings;
+        const isTop = layout === 'topmenu';
+        const isMobile = false;
         return (
-            <Header style={{ padding: 0 }}>
-                <div class="header-index">
-                    <Icon
-                        class="trigger"
-                        type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                        onClick={onCollapsed}
+            <Header style={{ padding: 0 }} class={fixedHeader ? 'fixedHeader' : ''}>
+                {isTop && !isMobile ? (
+                    // <TopNavHeader
+                    //     theme={navTheme}
+                    //     mode="horizontal"
+                    //     Authorized={Authorized}
+                    //     onCollapse={handleMenuCollapse}
+                    //     onNoticeClear={this.handleNoticeClear}
+                    //     onMenuClick={this.handleMenuClick}
+                    //     onNoticeVisibleChange={this.handleNoticeVisibleChange}
+                    //     {...this.props}
+                    // />
+                    <TopNavHeader
+                        theme={navTheme}
+                        layout={layout}
+                        mode="horizontal"
+                        menuData={menuData}
+                        logo={logo}
                     />
-                    <Spin spinning={spinning}></Spin>
-                    <GlobalHeader />
-                </div>
+                ) : (
+                        // <GlobalHeader
+                        //     onCollapse={handleMenuCollapse}
+                        //     onNoticeClear={this.handleNoticeClear}
+                        //     onMenuClick={this.handleMenuClick}
+                        //     onNoticeVisibleChange={this.handleNoticeVisibleChange}
+                        //     {...this.props}
+                        // />
+                        <GlobalHeader theme={navTheme} layout={layout}/>
+                    )}
             </Header>
         );
     }

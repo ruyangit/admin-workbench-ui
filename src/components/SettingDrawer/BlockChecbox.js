@@ -5,7 +5,6 @@ const BlockChecbox = {
     props: ["value", "list"],
     methods:{
         handleChange(key) {
-            this.$emit('blockInput', key);
             this.$emit('change', key);
         },
     },

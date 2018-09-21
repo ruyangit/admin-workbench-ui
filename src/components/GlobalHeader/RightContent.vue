@@ -1,5 +1,5 @@
 <template>
-    <div class="ai-header-right">
+    <div :class="className">
         <a-tooltip title="使用文档" placement="bottom">
             <a target="_blank" href="javascript:;" class="action" @click="success">
                 <a-icon type="question-circle-o" />
@@ -170,6 +170,7 @@ export default {
     ADivider: Divider,
     ASettingDrawer: SettingDrawer
   },
+  props:["theme","layout"],
   methods: {
     changeLang() {
       this.$i18n.locale = this.$i18n.locale === "en_US" ? "zh_CN" : "en_US";
@@ -193,6 +194,15 @@ export default {
         ),
       });
     },
+  },
+  computed:{
+      className(){
+        let className = 'ai-header-right';
+        if (this.theme === 'dark' && this.layout==='topmenu') {
+            className = `ai-header-right dark`;
+        }
+        return className;
+      }
   }
 };
 </script>

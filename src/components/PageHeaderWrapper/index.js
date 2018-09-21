@@ -1,17 +1,23 @@
 import './index.less'
 import GridContent from './GridContent';
 import PageHeader from '@/components/PageHeader';
+import { mapGetters } from "vuex";
 const PageHeaderWrapper = {
-    props: ["contentWidth","wrapperClassName","loading","content","extraContent","breadcrumbList","title","tabList", "tabActiveKey", "tabBarExtraContent","tabChange"],
+    props: ["wrapperClassName","loading","content","extraContent","breadcrumbList","title","tabList", "tabActiveKey", "tabBarExtraContent","tabChange"],
+    computed: {
+        ...mapGetters({
+            settings: "global/settings"
+        })
+    },
     render(){
-        const {$slots,contentWidth,wrapperClassName,content,extraContent,breadcrumbList,title,tabList,tabActiveKey,tabBarExtraContent,tabChange} = this
+        const {$slots,wrapperClassName,content,extraContent,breadcrumbList,title,tabList,tabActiveKey,tabBarExtraContent,tabChange} = this
         const children = $slots.default;
         const top = $slots.top;
         return (
             <div style={{ margin: '-24px -24px 0' }} class={wrapperClassName}>
                 {top}
                 <PageHeader
-                wide={contentWidth === 'Fixed'}
+                wide={this.settings.contentWidth === 'Fixed'}
                 home={this.$t('menu.home')}
                 content={content}
                 extraContent={extraContent}

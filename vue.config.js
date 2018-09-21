@@ -7,15 +7,14 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 // 基础路径 注意发布之前要先修改这里
-const baseUrl = '/'
-if (process.env.NODE_ENV === 'production') {
-  baseUrl = '/seed-workbench-ui/'
-}
+const BASE_URL = process.env.NODE_ENV === 'production'
+  ? '/seed-workbench-ui/'
+  : '/'
 module.exports = {
-  baseUrl: baseUrl, // 根据你的实际情况更改这里
+  baseUrl: BASE_URL, // 根据你的实际情况更改这里
   productionSourceMap: false,
   devServer: {
-    publicPath: baseUrl // 和 baseUrl 保持一致
+    publicPath: BASE_URL // 和 baseUrl 保持一致
   },
   css: {
     loaderOptions: {
