@@ -42,7 +42,7 @@ service.interceptors.request.use(config => {
 // respone interceptor
 service.interceptors.response.use(
     response => {
-        message.success('数据通讯完成', 1);
+        // message.success('数据通讯完成', 1);
         const { data } = response;
         if (data) {
             return data

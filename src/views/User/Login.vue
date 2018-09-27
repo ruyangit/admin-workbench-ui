@@ -88,6 +88,7 @@ import {
   message
 } from "ant-design-vue";
 import SendCaptchaButton from "@/components/SendCaptchaButton";
+import { mapGetters } from "vuex";
 export default {
   name: "ai-login",
   data: () => ({

@@ -13,7 +13,7 @@ const BasicLayout = {
         logo
     }),
     methods: {
-        formatter(data, parentPath = '', parentAuthority, parentName) {
+        formatter(data, parentPath = '', parentName) {
             return data.map(item => {
                 let locale = 'menu';
                 if (parentName && item.name) {
@@ -25,12 +25,11 @@ const BasicLayout = {
                 }
                 const result = {
                     ...item,
-                    locale,
-                    authority: item.authority || parentAuthority,
+                    locale
                 };
 
-                if (item.children) {
-                    const menus = this.formatter(item.children, `${parentPath}${item.path}/`, item.authority, locale);
+                if (!item.leaf) {
+                    const menus = this.formatter(item.children, `${parentPath}${item.path}/`, locale);
                     // Reduce memory usage
                     result.menus = menus;
                 }
@@ -39,8 +38,7 @@ const BasicLayout = {
             });
         },
         getMenuData() {
-            const { options: { routes } } = this.$router;
-            return this.formatter(routes);
+            return this.formatter(this.menuNav.data);
         },
         /**
          * 获取面包屑映射
@@ -85,14 +83,11 @@ const BasicLayout = {
             }
         }
     },
-    updated() {
-        // this.breadcrumbNameMap = this.getBreadcrumbNameMap();
-        // document.title = this.getPageTitle(to.path)
-    },
     computed: {
         ...mapGetters({
             collapsed: "global/getChangeLayoutCollapsed",
-            settings: "global/settings"
+            settings: "global/settings",
+            menuNav: "global/nav/getMenuNav"
         }),
         getContentStyle() {
             return {
@@ -115,6 +110,8 @@ const BasicLayout = {
         })
     },
     mounted() {
+        this.$store.dispatch('global/nav/getMenuNav');
+
         this.onResizeCollapsed()
 
         window.onresize = () => {

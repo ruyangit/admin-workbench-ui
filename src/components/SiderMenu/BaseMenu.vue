@@ -1,5 +1,6 @@
 <script>
-import { Menu, Icon } from "ant-design-vue";
+import { Menu, Icon, Spin } from "ant-design-vue";
+import { mapGetters } from "vuex";
 // Conversion router to menu.
 export default {
   props: {
@@ -10,6 +11,11 @@ export default {
     menuData: { default: [], type: Array },
     styles: { type: String }
   },
+  computed: {
+    ...mapGetters({
+        loading: "global/nav/loading"
+    }),
+    },
   components: {
     AMenu: Menu,
     AMenuItem: Menu.Item,
@@ -32,13 +38,14 @@ export default {
       return icon;
     },
     getNavMenuItems(menusData, parent) {
+
+      // console.log(menusData)
       if (!menusData) {
         return [];
       }
       return menusData.map(item => {
-        if (item.name && !item.hideInMenu) {
-          const ItemDom = this.getSubMenuOrItem(item, parent);
-          return this.checkPermissionItem(item.authority, ItemDom);
+        if (item.name) {
+          return this.getSubMenuOrItem(item, parent);
         }
         if (item.menus) {
           return this.getNavMenuItems(item.menus, parent);
@@ -49,7 +56,6 @@ export default {
       // doc: add hideChildrenInMenu 隐藏菜单
       if (
         item.menus &&
-        !item.hideChildrenInMenu &&
         item.menus.some(menu => menu.name)
       ) {
         const name = this.$t(item.locale);
@@ -95,9 +101,6 @@ export default {
         </router-link>
       );
     },
-    checkPermissionItem(authority, ItemDom) {
-      return ItemDom;
-    },
     conversionPath(path) {
       if (path && path.indexOf("http") === 0) {
         return path;
@@ -121,8 +124,8 @@ export default {
   render() {
     const { path } = this.$route;
     const openKeys = this.getOpenKeys(path);
-    
     return (
+      <Spin spinning={this.loading} class="baseMenuLoadding">
       <a-menu
         defaultOpenKeys={openKeys}
         selectedKeys={[path]}
@@ -132,8 +135,10 @@ export default {
         collapsed={this.collapsed}
         style={this.styles}
       >
+        
         {this.getNavMenuItems(this.menuData)}
       </a-menu>
+      </Spin>
     );
   }
 };

@@ -30,7 +30,6 @@ const router = new Router({
         {
           path: '/dashboard',
           name: 'dashboard',
-          icon: 'dashboard',
           component: BlankLayout,
           children: [
             { path: '/dashboard/analysis', name: 'analysis', component: () => import('@/views/Dashboard/Analysis') },
@@ -95,7 +94,6 @@ const router = new Router({
         // },
         {
           path: '/system',
-          icon: 'setting',
           name: 'system',
           component: BlankLayout,
           children: [
