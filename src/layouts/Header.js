@@ -13,22 +13,12 @@ const HeaderView = {
     },
     render() {
         const { menuData, logo } = this
-        const { layout, navTheme,fixedHeader } = this.settings;
+        const { layout, navTheme, fixedHeader } = this.settings;
         const isTop = layout === 'topmenu';
         const isMobile = false;
         return (
             <Header style={{ padding: 0 }} class={fixedHeader ? 'fixedHeader' : ''}>
                 {isTop && !isMobile ? (
-                    // <TopNavHeader
-                    //     theme={navTheme}
-                    //     mode="horizontal"
-                    //     Authorized={Authorized}
-                    //     onCollapse={handleMenuCollapse}
-                    //     onNoticeClear={this.handleNoticeClear}
-                    //     onMenuClick={this.handleMenuClick}
-                    //     onNoticeVisibleChange={this.handleNoticeVisibleChange}
-                    //     {...this.props}
-                    // />
                     <TopNavHeader
                         theme={navTheme}
                         layout={layout}
@@ -37,13 +27,6 @@ const HeaderView = {
                         logo={logo}
                     />
                 ) : (
-                        // <GlobalHeader
-                        //     onCollapse={handleMenuCollapse}
-                        //     onNoticeClear={this.handleNoticeClear}
-                        //     onMenuClick={this.handleMenuClick}
-                        //     onNoticeVisibleChange={this.handleNoticeVisibleChange}
-                        //     {...this.props}
-                        // />
                         <GlobalHeader theme={navTheme} layout={layout}/>
                     )}
             </Header>

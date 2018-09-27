@@ -3,7 +3,7 @@ import GridContent from './GridContent';
 import PageHeader from '@/components/PageHeader';
 import { mapGetters } from "vuex";
 const PageHeaderWrapper = {
-    props: ["wrapperClassName","loading","content","extraContent","breadcrumbList","title","tabList", "tabActiveKey", "tabBarExtraContent","tabChange"],
+    props: ["wrapperClassName","content","extraContent","breadcrumbList","title","tabList", "tabActiveKey", "tabBarExtraContent","tabChange"],
     computed: {
         ...mapGetters({
             settings: "global/settings"

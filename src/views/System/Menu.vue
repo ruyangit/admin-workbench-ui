@@ -1,10 +1,5 @@
 <template>
-    <a-page-header-wrapper
-    :loading="false"
-    :tabList="tabList"
-    tabActiveKey="articles"
-    :tabChange="tabChange"
-    >
+    <a-page-header-wrapper>
     menu
     
     </a-page-header-wrapper>
@@ -15,8 +10,6 @@ import { Avatar, Row, Col, Card, List } from "ant-design-vue";
 import PageHeaderWrapper from "@/components/PageHeaderWrapper";
 export default {
   data: () => ({
-    activitiesLoading: true,
-    projectLoading: false,
     tabList: [
       {
         key: "articles",

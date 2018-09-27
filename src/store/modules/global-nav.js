@@ -68,6 +68,31 @@ const mock = [
     }]
 }]
 
+function formatter(data, parentPath = '', parentName) {
+    return data.map(item => {
+        let locale = 'menu';
+        if (parentName && item.name) {
+            locale = `${parentName}.${item.name}`;
+        } else if (item.name) {
+            locale = `menu.${item.name}`;
+        } else if (parentName) {
+            locale = parentName;
+        }
+        const result = {
+            ...item,
+            locale
+        };
+
+        if (!item.leaf) {
+            const menus = formatter(item.children, `${parentPath}${item.path}/`, locale);
+            // Reduce memory usage
+            result.menus = menus;
+        }
+        delete result.children;
+        return result;
+    });
+}
+
 const state = {
     loading: false,
     menuNav: {
@@ -105,6 +130,29 @@ const mutations = {
 const getters = {
     ['getMenuNav'](state) {
         return state.menuNav;
+    },
+    ['getMenuData'](state) {
+        if(state.menuNav.data){
+          return  formatter(state.menuNav.data)
+        }
+        return [];
+    },
+    //获取面包屑映射
+    ['getBreadcrumbNameMap'](state) {
+        const routerMap = {};
+        const mergeMenuAndRouter = data => {
+            data.forEach(menuItem => {
+                if (!menuItem.leaf) {
+                    mergeMenuAndRouter(menuItem.menus);
+                }
+                // Reduce memory usage
+                routerMap[menuItem.path] = menuItem;
+            });
+        };
+        if(state.menuNav.data){
+            mergeMenuAndRouter(formatter(state.menuNav.data));
+        }
+        return routerMap;
     },
     ['loading'](state) {
         return state.loading;

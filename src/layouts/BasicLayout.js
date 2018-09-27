@@ -13,58 +13,12 @@ const BasicLayout = {
         logo
     }),
     methods: {
-        formatter(data, parentPath = '', parentName) {
-            return data.map(item => {
-                let locale = 'menu';
-                if (parentName && item.name) {
-                    locale = `${parentName}.${item.name}`;
-                } else if (item.name) {
-                    locale = `menu.${item.name}`;
-                } else if (parentName) {
-                    locale = parentName;
-                }
-                const result = {
-                    ...item,
-                    locale
-                };
-
-                if (!item.leaf) {
-                    const menus = this.formatter(item.children, `${parentPath}${item.path}/`, locale);
-                    // Reduce memory usage
-                    result.menus = menus;
-                }
-                delete result.children;
-                return result;
-            });
-        },
-        getMenuData() {
-            return this.formatter(this.menuNav.data);
-        },
-        /**
-         * 获取面包屑映射
-         * @param {Object} menuData 菜单配置
-         */
-        getBreadcrumbNameMap() {
-            const routerMap = {};
-            const mergeMenuAndRouter = data => {
-                data.forEach(menuItem => {
-                    if (menuItem.menus) {
-                        mergeMenuAndRouter(menuItem.menus);
-                    }
-                    // Reduce memory usage
-                    routerMap[menuItem.path] = menuItem;
-                });
-            };
-            mergeMenuAndRouter(this.getMenuData());
-            return routerMap;
-        },
 
         matchParamsPath(pathname) {
-            const breadcrumbNameMap = this.getBreadcrumbNameMap()
-            const pathKey = Object.keys(breadcrumbNameMap).find(key =>
+            const pathKey = Object.keys(this.breadcrumbNameMap).find(key =>
                 pathToRegexp(key).test(pathname)
             );
-            return breadcrumbNameMap[pathKey];
+            return this.breadcrumbNameMap[pathKey];
         },
 
         getPageTitle(pathname) {
@@ -87,7 +41,7 @@ const BasicLayout = {
         ...mapGetters({
             collapsed: "global/getChangeLayoutCollapsed",
             settings: "global/settings",
-            menuNav: "global/nav/getMenuNav"
+            breadcrumbNameMap: "global/nav/getBreadcrumbNameMap",
         }),
         getContentStyle() {
             return {
@@ -124,16 +78,14 @@ const BasicLayout = {
         const { layout } = this.settings;
         const isTop = layout === 'topmenu';
         const isMobile = false;
-        const menuData = this.getMenuData();
-        eventBus.breadcrumbNameMap = this.getBreadcrumbNameMap()
         return (
             <Layout class="ai-basic-layout-container">
                 {isTop && !isMobile ? null : (
-                    <SiderMenu collapsed={collapsed} menuData={menuData} logo={logo}/>
+                    <SiderMenu collapsed={collapsed} logo={logo}/>
                 )}
 
                 <Layout>
-                    <Header menuData={menuData} logo={logo}/>
+                    <Header logo={logo}/>
                     <Layout.Content style={getContentStyle}>
                         <router-view />
                     </Layout.Content>

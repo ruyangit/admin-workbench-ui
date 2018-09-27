@@ -1,7 +1,7 @@
 import './index.less'
 import pathToRegexp from 'path-to-regexp';
 import { Breadcrumb,Tabs } from "ant-design-vue";
-import eventBus from '@/utils/eventBus.js'
+import { mapGetters } from "vuex";
 const {TabPane} = Tabs
 export function urlToList(url) {
     const urllist = url.split('/').filter(i => i);
@@ -20,6 +20,11 @@ export const getBreadcrumb = (breadcrumbNameMap, url) => {
     return breadcrumb || {};
 };
 const PageHeader = {
+    computed: {
+        ...mapGetters({
+            breadcrumbNameMap: "global/nav/getBreadcrumbNameMap",
+        }),
+    },
     props: ["wide", "home", "title", "action", "content", "extraContent", "breadcrumbList", "breadcrumbSeparator", "itemRender", "linkElement","tabList", "tabActiveKey", "tabBarExtraContent","tabChange"],
     methods: {
         conversionFromProps() {
@@ -47,39 +52,15 @@ const PageHeader = {
                 </Breadcrumb>
             );
         },
-        getBreadcrumbProps() {
-            const { params, $router, $route } = this;
-            const { breadcrumbNameMap } = eventBus;
-            return {
-                router: $router,
-                params,
-                route: $route,
-                breadcrumbNameMap
-            };
-        },
         conversionBreadcrumbList() {
-            const { breadcrumbList, breadcrumbSeparator } = this;
-            const { router, params, route, breadcrumbNameMap } = this.getBreadcrumbProps();
+            const { breadcrumbList, $route, breadcrumbNameMap} = this;
             if (breadcrumbList && breadcrumbList.length) {
                 return this.conversionFromProps();
             }
-            // 如果传入 routes 和 params 属性
-            // If pass routes and params attributes
-            // if (router && params) {
-            //     return (
-            //         <Breadcrumb
-            //             class="breadcrumb"
-            //             routes={routes.filter(route => route.breadcrumbName)}
-            //             params={params}
-            //             // itemRender={this.itemRender}
-            //             separator={breadcrumbSeparator}
-            //         />
-            //     );
-            // }
             // 根据 location 生成 面包屑
             // Generate breadcrumbs based on location
-            if (route && route.path) {
-                return this.conversionFromLocation(route, breadcrumbNameMap);
+            if ($route && $route.path) {
+                return this.conversionFromLocation($route, breadcrumbNameMap);
             }
             return null;
         },

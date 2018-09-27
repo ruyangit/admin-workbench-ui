@@ -6,7 +6,7 @@
         <h1>Ant Design Pro</h1>
       </router-link>
     </div>
-    <a-base-menu :collapsed="collapsed" :menuData="menuData" :theme="settings.navTheme" :layout="settings.layout" styles="padding: '16px 0'; width: '100%'"/>
+    <a-base-menu :collapsed="collapsed" :theme="settings.navTheme" :layout="settings.layout" styles="padding: '16px 0'; width: '100%'"/>
   </a-layout-sider>
 </template>
 
@@ -23,10 +23,6 @@ export default {
     fixSiderbar: {
       default: false,
       type: Boolean
-    },
-    menuData: {
-      default: [],
-      type: Array
     },
     logo: { type: String }
   },

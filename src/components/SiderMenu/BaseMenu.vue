@@ -8,12 +8,12 @@ export default {
     theme: { default: "dark", type: String },
     layout: { type: String },
     mode: { default: "inline", type: String },
-    menuData: { default: [], type: Array },
     styles: { type: String }
   },
   computed: {
     ...mapGetters({
-        loading: "global/nav/loading"
+        loading: "global/nav/loading",
+        menuData: "global/nav/getMenuData",
     }),
     },
   components: {
